@@ -1,0 +1,101 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model carrito {
+  id_carrito       Int                @id @default(autoincrement())
+  id_usuario       Int
+  creado_en        DateTime?          @default(now()) @db.Timestamp(6)
+  estado           String?            @default("activo") @db.VarChar(20)
+  usuario          usuario            @relation(fields: [id_usuario], references: [id_usuario], onDelete: Cascade, onUpdate: NoAction)
+  carrito_producto carrito_producto[]
+}
+
+model carrito_producto {
+  id_detalle     Int            @id @default(autoincrement())
+  id_carrito     Int
+  id_producto    Int
+  talle          talle
+  cantidad       Int?           @default(1)
+  precio         Decimal        @db.Decimal(10, 2)
+  carrito        carrito        @relation(fields: [id_carrito], references: [id_carrito], onDelete: Cascade, onUpdate: NoAction)
+  producto_talle producto_talle @relation(fields: [id_producto, talle], references: [id_producto, talle], onDelete: Cascade, onUpdate: NoAction)
+}
+
+model pedido {
+  id_pedido       Int               @id @default(autoincrement())
+  id_usuario      Int
+  total           Decimal           @db.Decimal(10, 2)
+  fecha           DateTime?         @default(now()) @db.Timestamp(6)
+  estado          String?           @db.VarChar(200)
+  direccion_envio String?           @db.VarChar(255)
+  usuario         usuario           @relation(fields: [id_usuario], references: [id_usuario], onDelete: Cascade, onUpdate: NoAction)
+  pedido_producto pedido_producto[]
+}
+
+model pedido_producto {
+  id_detalle  Int      @id @default(autoincrement())
+  id_pedido   Int
+  id_producto Int
+  talle       talle
+  cantidad    Int?     @default(1)
+  precio      Decimal  @db.Decimal(10, 2)
+  pedido      pedido   @relation(fields: [id_pedido], references: [id_pedido], onDelete: Cascade, onUpdate: NoAction)
+  producto    producto @relation(fields: [id_producto], references: [id_producto], onDelete: Cascade, onUpdate: NoAction)
+}
+
+model producto {
+  id_producto       Int               @id @default(autoincrement())
+  nombre            String            @db.VarChar(100)
+  descripcion       String?
+  clasificacion     clasificacion
+  animal            animal
+  precio            Decimal           @db.Decimal(10, 2)
+  imagen_principal  String?           @db.VarChar(255)
+  imagen_secundaria String?           @db.VarChar(255)
+  pedido_producto   pedido_producto[]
+  producto_talle    producto_talle[]
+}
+
+model producto_talle {
+  id_producto      Int
+  talle            talle
+  stock            Int?               @default(0)
+  carrito_producto carrito_producto[]
+  producto         producto           @relation(fields: [id_producto], references: [id_producto], onDelete: Cascade, onUpdate: NoAction)
+
+  @@id([id_producto, talle])
+}
+
+model usuario {
+  id_usuario Int       @id @default(autoincrement())
+  nombre     String    @db.VarChar(50)
+  apellido   String    @db.VarChar(50)
+  email      String    @unique @db.VarChar(100)
+  contrase_a String    @map("contraseña") @db.VarChar(255)
+  direccion  String?   @db.VarChar(255)
+  carrito    carrito[]
+  pedido     pedido[]
+}
+
+enum animal {
+  perro
+  gato
+}
+
+enum clasificacion {
+  pa_uelo @map("pañuelo")
+  sweater
+}
+
+enum talle {
+  S
+  M
+  L
+  XL
+}
