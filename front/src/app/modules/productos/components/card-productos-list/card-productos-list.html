@@ -1,0 +1,24 @@
+<p-card
+  [style]="{ overflow: 'hidden', background: 'white', borderRadius: '0px' }"
+  [ngClass]="'max-w-sm shadow-sm'"
+>
+  <ng-template pTemplate="header">
+    <div class="relative w-full h-[500px] group overflow-hidden">
+      <img
+        [src]="'http://localhost:3000/public/images/' + producto.imagen_principal"
+        [alt]="producto.nombre"
+        class="w-full h-full object-cover transition-opacity duration-500 group-hover:opacity-0"
+      />
+      <img
+        [src]="'http://localhost:3000/public/images/' + producto.imagen_secundaria"
+        [alt]="producto.nombre"
+        class="absolute top-0 left-0 w-full h-full object-cover transition-opacity duration-500 opacity-0 group-hover:opacity-100"
+      />
+    </div>
+  </ng-template>
+
+  <div class="text-center mt-4 bg-white">
+    <p class="text-xs font-semibold tracking-widest text-gray-500 uppercase">{{ producto.nombre }}</p>
+    <p class="text-sm font-semibold text-gray-900 mt-2">${{ producto.precio }}</p>
+  </div>
+</p-card>
