@@ -1,12 +1,12 @@
+// src/app/app.routes.ts
 import { Routes } from '@angular/router';
 
 export const routes: Routes = [
-        {
-        path: 'productos',
-        loadChildren: () => import('./modules/productos/productos.routes').then(c => c.productoRoutes)
-    },
-    {
-        path: '**',
-        redirectTo: 'episode'
-    },
+  { path: '', redirectTo: 'productos', pathMatch: 'full' },     // 👈 default
+  {
+    path: 'productos',
+    loadChildren: () =>
+      import('./modules/productos/productos.routes').then(m => m.productoRoutes)
+  },
+  { path: '**', redirectTo: 'productos' }                        // 👈 no 'episode'
 ];

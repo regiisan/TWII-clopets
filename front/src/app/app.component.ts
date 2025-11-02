@@ -1,14 +1,15 @@
+// src/app/app.component.ts
 import { Component, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { ListProductosComponent } from "./modules/productos/pages/list-productos/list-productos.component";
-import { CardProductosList } from './modules/productos/components/card-productos-list/card-productos-list';
-import { Header } from "./shared/header/header";
+import { Header } from "./shared/header/header"; 
+import { Footer } from './shared/footer/footer';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, ListProductosComponent, Header, CardProductosList],
+  standalone: true,                             // 👈 faltaba
+  imports: [RouterOutlet, Header, Footer],              // quitá componentes que se rutean
   templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+  styleUrls: ['./app.component.css']            // 👈 plural
 })
 export class App {
   protected readonly title = signal('front');
