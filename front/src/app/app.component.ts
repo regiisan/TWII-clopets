@@ -6,10 +6,10 @@ import { Footer } from './shared/footer/footer';
 
 @Component({
   selector: 'app-root',
-  standalone: true,                             // 👈 faltaba
-  imports: [RouterOutlet, Header, Footer],              // quitá componentes que se rutean
+  standalone: true,                             
+  imports: [RouterOutlet, Header, Footer],              
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']            // 👈 plural
+  styleUrls: ['./app.component.css']            
 })
 export class App {
   protected readonly title = signal('front');

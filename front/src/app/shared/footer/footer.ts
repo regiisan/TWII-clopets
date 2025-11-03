@@ -8,5 +8,5 @@ import { RouterLink } from '@angular/router';
   templateUrl: './footer.html'
 })
 export class Footer {
-  year = new Date().getFullYear(); // 👈 usar esta propiedad en el HTML
+  year = new Date().getFullYear(); 
 }
