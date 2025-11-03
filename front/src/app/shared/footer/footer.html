@@ -1,0 +1,87 @@
+<footer class="mt-16 border-t border-black/5 dark:border-white/10 bg-white/90 dark:bg-neutral-900/80">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-10">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+            
+            <div>
+                <div class="flex items-center gap-3">
+                    <span
+                        class="inline-grid place-items-center w-9 h-9 rounded-xl bg-gradient-to-br from-indigo-500 to-fuchsia-500 text-white font-bold">CP</span>
+                    <span class="text-lg font-extrabold text-neutral-900 dark:text-white">CloPets</span>
+                </div>
+                <p class="mt-3 text-sm text-neutral-600 dark:text-neutral-400">
+                    Accesorios y ropa para tus mejores amigos. Calidad, comodidad y estilo.
+                </p>
+            </div>
+
+           
+            <div>
+                <h4 class="text-sm font-semibold text-neutral-900 dark:text-white">Tienda</h4>
+                <ul class="mt-3 space-y-2 text-sm">
+                    <li><a routerLink="/productos"
+                            class="text-neutral-600 dark:text-neutral-400 hover:text-indigo-600 dark:hover:text-indigo-400">Productos</a>
+                    </li>
+                    <li><a routerLink="/carrito"
+                            class="text-neutral-600 dark:text-neutral-400 hover:text-indigo-600 dark:hover:text-indigo-400">Carrito</a>
+                    </li>
+                    <li><a routerLink="/ofertas"
+                            class="text-neutral-600 dark:text-neutral-400 hover:text-indigo-600 dark:hover:text-indigo-400">Ofertas</a>
+                    </li>
+                </ul>
+            </div>
+
+           
+            <div>
+                <h4 class="text-sm font-semibold text-neutral-900 dark:text-white">Soporte</h4>
+                <ul class="mt-3 space-y-2 text-sm">
+                    <li><a routerLink="/envios"
+                            class="text-neutral-600 dark:text-neutral-400 hover:text-indigo-600 dark:hover:text-indigo-400">Envíos</a>
+                    </li>
+                    <li><a routerLink="/cambios"
+                            class="text-neutral-600 dark:text-neutral-400 hover:text-indigo-600 dark:hover:text-indigo-400">Cambios
+                            & Devoluciones</a></li>
+                    <li><a routerLink="/contacto"
+                            class="text-neutral-600 dark:text-neutral-400 hover:text-indigo-600 dark:hover:text-indigo-400">Contacto</a>
+                    </li>
+                </ul>
+            </div>
+
+        
+            <div>
+                <h4 class="text-sm font-semibold text-neutral-900 dark:text-white">Novedades</h4>
+                <p class="mt-3 text-sm text-neutral-600 dark:text-neutral-400">Suscribite para enterarte de drops y
+                    promos.</p>
+                <form class="mt-3 flex gap-2">
+                    <input type="email" required placeholder="tu@email.com"
+                        class="w-full rounded-xl border border-neutral-200 dark:border-neutral-700 bg-white/70 dark:bg-neutral-800/70 px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-indigo-500 dark:placeholder-neutral-500">
+                    <button
+                        class="shrink-0 rounded-xl bg-indigo-600 text-white px-3.5 py-2 text-sm font-semibold hover:bg-indigo-500 transition">
+                        Suscribirme
+                    </button>
+                </form>
+            </div>
+        </div>
+
+        <div
+            class="mt-10 flex flex-col sm:flex-row items-center justify-between gap-3 border-t border-black/5 dark:border-white/10 pt-6">
+            <p class="text-xs text-neutral-500">
+                &copy; {{ year }} CloPets · Todos los derechos reservados
+            </p>
+
+            <div class="flex items-center gap-4 text-neutral-500">
+               
+                <a href="#" aria-label="Instagram" class="hover:text-indigo-600 dark:hover:text-indigo-400 transition">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24" fill="currentColor">
+                        <path
+                            d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5zm0 2a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3H7zm5 3.5a5.5 5.5 0 1 1 0 11 5.5 5.5 0 0 1 0-11zm0 2a3.5 3.5 0 1 0 0 7 3.5 3.5 0 0 0 0-7zm5.25-.75a.75.75 0 1 1 0 1.5.75.75 0 0 1 0-1.5z" />
+                    </svg>
+                </a>
+                <a href="#" aria-label="Twitter" class="hover:text-indigo-600 dark:hover:text-indigo-400 transition">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24" fill="currentColor">
+                        <path
+                            d="M22 5.92c-.77.35-1.6.58-2.46.69a4.19 4.19 0 0 0 1.84-2.31 8.38 8.38 0 0 1-2.65 1.01 4.18 4.18 0 0 0-7.12 3.81A11.86 11.86 0 0 1 3.14 4.8a4.17 4.17 0 0 0 1.3 5.58 4.17 4.17 0 0 1-1.9-.52v.05a4.18 4.18 0 0 0 3.35 4.1c-.46.13-.95.2-1.45.08a4.19 4.19 0 0 0 3.91 2.9A8.38 8.38 0 0 1 2 19.55a11.82 11.82 0 0 0 6.41 1.88c7.69 0 11.9-6.37 11.9-11.89 0-.18 0-.36-.01-.54A8.44 8.44 0 0 0 22 5.92z" />
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </div>
+</footer>

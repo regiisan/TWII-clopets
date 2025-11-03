@@ -1,0 +1,72 @@
+<section class="min-h-[70vh] grid place-items-center px-4">
+  <div class="w-full max-w-lg rounded-2xl border border-black/5 dark:border-white/10 bg-white/90 dark:bg-neutral-900/80 backdrop-blur p-6 shadow-sm">
+    <h1 class="text-2xl font-extrabold tracking-tight text-neutral-900 dark:text-white">Crear cuenta</h1>
+    <p class="mt-1 text-sm text-neutral-500 dark:text-neutral-400">Completá tus datos para registrarte.</p>
+
+    <form class="mt-6 grid gap-4" [formGroup]="form" (ngSubmit)="submit()">
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div>
+          <label class="block text-sm font-medium text-neutral-700 dark:text-neutral-200">Nombre</label>
+          <input type="text" formControlName="nombre"
+                 class="mt-1 w-full rounded-xl border border-neutral-200 dark:border-neutral-700 bg-white/70 dark:bg-neutral-800/70 px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-indigo-500">
+          <div class="mt-1 text-xs text-red-600" *ngIf="form.get('nombre')?.touched && form.get('nombre')?.invalid">
+            Ingresá tu nombre.
+          </div>
+        </div>
+        <div>
+          <label class="block text-sm font-medium text-neutral-700 dark:text-neutral-200">Apellido</label>
+          <input type="text" formControlName="apellido"
+                 class="mt-1 w-full rounded-xl border border-neutral-200 dark:border-neutral-700 bg-white/70 dark:bg-neutral-800/70 px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-indigo-500">
+          <div class="mt-1 text-xs text-red-600" *ngIf="form.get('apellido')?.touched && form.get('apellido')?.invalid">
+            Ingresá tu apellido.
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <label class="block text-sm font-medium text-neutral-700 dark:text-neutral-200">Email</label>
+        <input type="email" formControlName="email"
+               class="mt-1 w-full rounded-xl border border-neutral-200 dark:border-neutral-700 bg-white/70 dark:bg-neutral-800/70 px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-indigo-500"
+               placeholder="tucorreo@mail.com">
+        <div class="mt-1 text-xs text-red-600" *ngIf="form.get('email')?.touched && form.get('email')?.invalid">
+          Ingresá un e-mail válido.
+        </div>
+      </div>
+
+      <div>
+        <label class="block text-sm font-medium text-neutral-700 dark:text-neutral-200">Contraseña</label>
+        <div class="mt-1 relative">
+          <input [type]="showPass() ? 'text' : 'password'" formControlName="password"
+                 class="w-full rounded-xl border border-neutral-200 dark:border-neutral-700 bg-white/70 dark:bg-neutral-800/70 px-3 py-2 pr-10 text-sm outline-none focus:ring-2 focus:ring-indigo-500"
+                 placeholder="Mínimo 6 caracteres">
+          <button type="button" (click)="toggleShow()"
+                  class="absolute inset-y-0 right-2 my-auto rounded-md px-2 text-neutral-500 hover:text-neutral-800 dark:hover:text-neutral-200">
+            {{ showPass() ? 'Ocultar' : 'Ver' }}
+          </button>
+        </div>
+        <div class="mt-1 text-xs text-red-600" *ngIf="form.get('password')?.touched && form.get('password')?.invalid">
+          Mínimo 6 caracteres.
+        </div>
+      </div>
+
+      <div>
+        <label class="block text-sm font-medium text-neutral-700 dark:text-neutral-200">Dirección (opcional)</label>
+        <input type="text" formControlName="direccion"
+               class="mt-1 w-full rounded-xl border border-neutral-200 dark:border-neutral-700 bg-white/70 dark:bg-neutral-800/70 px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-indigo-500">
+      </div>
+
+      <button type="submit"
+              class="mt-2 inline-flex items-center justify-center rounded-xl bg-indigo-600 text-white px-4 py-2.5 text-sm font-semibold hover:bg-indigo-500 disabled:opacity-60"
+              [disabled]="loading()">
+        {{ loading() ? 'Creando…' : 'Crear cuenta' }}
+      </button>
+
+      <p class="text-sm text-neutral-600 dark:text-neutral-400">
+        ¿Ya tenés cuenta?
+        <a routerLink="/auth/login" class="font-semibold text-indigo-600 hover:underline">Ingresá</a>
+      </p>
+
+      <p class="text-sm text-red-600" *ngIf="errorMsg()">{{ errorMsg() }}</p>
+    </form>
+  </div>
+</section>

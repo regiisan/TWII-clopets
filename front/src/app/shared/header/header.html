@@ -1,0 +1,59 @@
+<header class="sticky top-0 z-50 backdrop-blur supports-[backdrop-filter]:bg-white/70 dark:supports-[backdrop-filter]:bg-neutral-900/60 bg-white/90 dark:bg-neutral-900/80 border-b border-black/5 dark:border-white/10">
+  <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <div class="flex h-16 items-center justify-between">
+      <!-- Brand -->
+      <a routerLink="/productos" class="flex items-center gap-3" (click)="close()">
+        <!-- Simple logo -->
+        <span class="inline-grid place-items-center w-9 h-9 rounded-xl bg-gradient-to-br from-indigo-500 to-fuchsia-500 text-white font-bold">CP</span>
+        <div class="leading-tight">
+          <span class="block font-extrabold text-neutral-900 dark:text-white tracking-tight">CloPets</span>
+          <span class="block text-xs text-neutral-500 dark:text-neutral-400 -mt-0.5">Tienda para mascotas</span>
+        </div>
+      </a>
+
+      <!-- Desktop nav -->
+      <nav class="hidden md:flex items-center gap-6">
+        <a routerLink="/productos" routerLinkActive="text-indigo-600 dark:text-indigo-400"
+           class="text-sm font-medium text-neutral-700 dark:text-neutral-200 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">Productos</a>
+
+        <a routerLink="/carrito" class="text-sm font-medium text-neutral-700 dark:text-neutral-200 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">
+          Carrito
+        </a>
+
+        <a routerLink="/contacto" class="text-sm font-medium text-neutral-700 dark:text-neutral-200 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">
+          Contacto
+        </a>
+
+        <a routerLink="/auth/login"
+           class="inline-flex items-center rounded-xl border border-neutral-200/70 dark:border-neutral-700 px-3.5 py-2 text-sm font-semibold text-neutral-900 dark:text-white hover:bg-neutral-50 dark:hover:bg-neutral-800 transition">
+          Ingresar
+        </a>
+      </nav>
+
+      <!-- Mobile menu button -->
+      <button type="button" class="md:hidden inline-flex items-center justify-center rounded-xl p-2 hover:bg-neutral-100 dark:hover:bg-neutral-800"
+              (click)="toggle()" aria-label="Abrir menú">
+        <svg *ngIf="!open()" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3.75 6.75h16.5M3.75 12h16.5M3.75 17.25h16.5"/>
+        </svg>
+        <svg *ngIf="open()" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M6 18L18 6M6 6l12 12"/>
+        </svg>
+      </button>
+    </div>
+
+    <!-- Mobile nav -->
+    <div *ngIf="open()" class="md:hidden pb-4 animate-[fadeIn_.15s_ease-in]">
+      <nav class="grid gap-2">
+        <a routerLink="/productos" (click)="close()"
+           class="rounded-lg px-3 py-2 text-sm font-medium text-neutral-800 dark:text-neutral-200 hover:bg-neutral-100 dark:hover:bg-neutral-800">Productos</a>
+        <a routerLink="/carrito" (click)="close()"
+           class="rounded-lg px-3 py-2 text-sm font-medium text-neutral-800 dark:text-neutral-200 hover:bg-neutral-100 dark:hover:bg-neutral-800">Carrito</a>
+        <a routerLink="/contacto" (click)="close()"
+           class="rounded-lg px-3 py-2 text-sm font-medium text-neutral-800 dark:text-neutral-200 hover:bg-neutral-100 dark:hover:bg-neutral-800">Contacto</a>
+        <a routerLink="/login" (click)="close()"
+           class="rounded-lg px-3 py-2 text-sm font-semibold text-neutral-900 dark:text-white ring-1 ring-neutral-200/70 dark:ring-neutral-700 hover:bg-neutral-50 dark:hover:bg-neutral-800">Ingresar</a>
+      </nav>
+    </div>
+  </div>
+</header>
