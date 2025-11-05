@@ -1,7 +1,4 @@
-<p-card
-  [style]="{ overflow: 'hidden', background: 'white', borderRadius: '0px' }"
-  [ngClass]="'max-w-sm shadow-sm'"
->
+<p-card [ngClass]="'w-full shadow-sm custom-card'">
   <ng-template pTemplate="header">
     <div class="relative w-full h-[500px] group overflow-hidden">
       <img
@@ -17,8 +14,12 @@
     </div>
   </ng-template>
 
-  <div class="text-center mt-4 bg-white">
-    <p class="text-xs font-semibold tracking-widest text-gray-500 uppercase">{{ producto.nombre }}</p>
-    <p class="text-sm font-semibold text-gray-900 mt-2">${{ producto.precio }}</p>
+  <div class="text-center bg-white">
+    <p class="text-xs font-semibold tracking-widest text-gray-500 uppercase">
+      {{ producto.nombre }}
+    </p>
+    <p class="text-sm font-semibold text-gray-900 mt-2">
+      {{ producto.precio | currency : 'ARS' : 'symbol' : '1.2-2' : 'es-AR' }}
+    </p>
   </div>
 </p-card>
