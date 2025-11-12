@@ -21,10 +21,27 @@ export class AuthService {
   private base = environment.api_url;
 
   login(dto: LoginDTO) {
-    return this.http.post<{ token: string; user: any }>(`${this.base}/api/auth/login`, dto);
+    const payload = {
+      email: dto.email,
+      contrase_a: dto.password,  
+    };
+    return this.http.post<{ token: string; user: any }>(
+      `${this.base}/api/usuario/login`,
+      payload
+    );
   }
 
   register(dto: RegisterDTO) {
-    return this.http.post<{ id_usuario: number }>(`${this.base}/api/auth/register`, dto);
+    const payload = {
+      nombre: dto.nombre,
+      apellido: dto.apellido,
+      email: dto.email,
+      contrase_a: dto.password,  
+      direccion: dto.direccion ?? null,
+    };
+    return this.http.post<{ id_usuario: number }>(
+      `${this.base}/api/usuario/registro`,
+      payload
+    );
   }
 }
