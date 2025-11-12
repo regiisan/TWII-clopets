@@ -1,8 +1,7 @@
 import { type Request, type Response } from "express";
 import { ProductoService } from "../services/producto.service.js";
 import { ProductoRepository } from "../repository/producto.repository.js";
-import type { clasificacion as ClasificacionEnum, animal as AnimalEnum} from "@prisma/client";
-import type { ProductoFilter } from "../models/productoFilter.types.js";
+import type { ProductoFilter, Clasificacion, Animal } from "../models/productoFilter.model.js";
 
 const productoRepository = new ProductoRepository();
 const productoService = new ProductoService(productoRepository);
@@ -15,8 +14,8 @@ export class ProductoController {
       const { clasificacion, animal, precioMin, precioMax } = req.query;
 
       const filters: ProductoFilter = {
-        ...(clasificacion && { clasificacion: clasificacion as ClasificacionEnum}),
-        ...(animal && { animal: animal as AnimalEnum }),
+        ...(clasificacion && { clasificacion: clasificacion as Clasificacion}),
+        ...(animal && { animal: animal as Animal }),
         ...(precioMin && { minPrecio: parseFloat(precioMin as string) }),
         ...(precioMax && { maxPrecio: parseFloat(precioMax as string) }),
       };

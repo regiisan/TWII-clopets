@@ -1,0 +1,38 @@
+[
+  {
+    "_id": "clopets-collection",
+    "colName": "Clopets API",
+    "created": "2025-11-11T00:00:00.000Z",
+    "sortNum": 10000,
+    "folders": [
+      {
+        "_id": "usuarios-folder",
+        "name": "Usuarios",
+        "containerId": "",
+        "created": "2025-11-11T00:00:00.000Z",
+        "sortNum": 10000
+      },
+      {
+        "_id": "productos-folder",
+        "name": "Productos",
+        "containerId": "",
+        "created": "2025-11-11T00:00:00.000Z",
+        "sortNum": 20000
+      },
+      {
+        "_id": "carrito-folder",
+        "name": "Carrito",
+        "containerId": "",
+        "created": "2025-11-11T00:00:00.000Z",
+        "sortNum": 30000
+      },
+      {
+        "_id": "pedidos-folder",
+        "name": "Pedidos",
+        "containerId": "",
+        "created": "2025-11-11T00:00:00.000Z",
+        "sortNum": 40000
+      }
+    ]
+  }
+]
