@@ -8,16 +8,20 @@ import { CardProductosList } from '../../../productos/components/card-productos-
 import { MessageService } from 'primeng/api';
 import { ToastModule } from 'primeng/toast';
 import { Toast } from 'primeng/toast';
+import { ProgressSpinnerModule } from 'primeng/progressspinner';
+import { Spinner } from '../../../../shared/spinner/spinner';
 
 @Component({
   selector: 'app-list-productos',
-  imports: [Toast, TableModule, CardModule, CommonModule, CardProductosList, ToastModule],
+  imports: [Spinner, Toast, TableModule, CardModule, CommonModule, CardProductosList, ToastModule, ProgressSpinnerModule],
   templateUrl: './list-productos.component.html',
   styleUrl: './list-productos.component.css',
   providers : [MessageService]
 })
 
 export class ListProductosComponent implements OnInit, OnDestroy {
+
+  spinner = true;
 
   productos: Producto[] = [];
   productoService = inject(ProductosService);
@@ -41,6 +45,7 @@ listarProductos(){
       this.messageService.add({severity:'error', summary: 'Error', detail: 'Error al cargar los productos'});
     },
     complete : ()=>{
+      this.spinner = false;
     }
   }
 )

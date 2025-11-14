@@ -15,4 +15,13 @@ export class ProductosService {
   listProductos() {
     return this.http.get<Producto[]>(`${environment.api_url}/producto`);
   }
+
+  verProducto(id: number): Observable<Producto> {
+    return this.http.get<Producto>(`${environment.api_url}/producto/${id}`);
+  }
+
+  getTalles(id: number) {
+    return this.http.get<any[]>(`${environment.api_url}/productos/${id}/talles`);
+  }
 }
+

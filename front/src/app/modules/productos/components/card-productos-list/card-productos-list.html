@@ -15,8 +15,8 @@
   </ng-template>
 
   <div class="text-center bg-white">
-    <p class="text-xs font-semibold tracking-widest text-gray-500 uppercase">
-      {{ producto.nombre }}
+    <p class="text-xs font-semibold tracking-widest text-gray-500 uppercase" (click)="verProducto(producto)">
+      {{ producto.nombre }} 
     </p>
     <p class="text-sm font-semibold text-gray-900 mt-2">
       {{ producto.precio | currency : 'ARS' : 'symbol' : '1.2-2' : 'es-AR' }}

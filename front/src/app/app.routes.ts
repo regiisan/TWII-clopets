@@ -2,7 +2,13 @@
 import { Routes } from '@angular/router';
 
 export const routes: Routes = [
-  { path: '', redirectTo: 'productos', pathMatch: 'full' },
+  { path: '', redirectTo: 'home', pathMatch: 'full' },
+
+  {
+    path: 'home',
+    loadChildren: () =>
+      import('./modules/home/home-module').then(m => m.HomeModule)
+  },
 
   {
     path: 'productos',
