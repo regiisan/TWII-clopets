@@ -10,7 +10,7 @@ export const pedidosRoutes: Routes = [
         component: ListPedidosComponent,
       },
       {
-        path: 'list-productos',
+        path: 'list-pedidos',
         component: ListPedidosComponent,
       }
     ],

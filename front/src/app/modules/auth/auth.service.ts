@@ -1,6 +1,9 @@
+// src/app/modules/auth/auth.service.ts
 import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
+import { BehaviorSubject } from 'rxjs';
+import { tap } from 'rxjs/operators';
 
 export interface LoginDTO {
   email: string;
@@ -15,20 +18,47 @@ export interface RegisterDTO {
   direccion?: string | null;
 }
 
+export interface AuthUser {
+  id_usuario: number;
+  nombre: string;
+  apellido: string;
+  email: string;
+  direccion?: string | null;
+}
+
 @Injectable({ providedIn: 'root' })
 export class AuthService {
   private http = inject(HttpClient);
-  private base = environment.api_url;
+  private base = environment.api_url; 
+
+  private currentUserSubject = new BehaviorSubject<AuthUser | null>(
+    this.readUserFromStorage()
+  );
+  currentUser$ = this.currentUserSubject.asObservable();
+
+  private readUserFromStorage(): AuthUser | null {
+    const raw = localStorage.getItem('auth_user');
+    if (!raw) return null;
+    try {
+      return JSON.parse(raw) as AuthUser;
+    } catch {
+      return null;
+    }
+  }
 
   login(dto: LoginDTO) {
     const payload = {
       email: dto.email,
-      contrase_a: dto.password,  
+      contrase_a: dto.password, 
     };
-    return this.http.post<{ token: string; user: any }>(
-      `${this.base}/usuario/login`,
-      payload
-    );
+    return this.http
+      .post<AuthUser>(`${this.base}/usuario/login`, payload)
+      .pipe(
+        tap((user) => {
+          this.currentUserSubject.next(user);
+          localStorage.setItem('auth_user', JSON.stringify(user));
+        })
+      );
   }
 
   register(dto: RegisterDTO) {
@@ -36,12 +66,26 @@ export class AuthService {
       nombre: dto.nombre,
       apellido: dto.apellido,
       email: dto.email,
-      contrase_a: dto.password,  
+      contrase_a: dto.password,
       direccion: dto.direccion ?? null,
     };
+
     return this.http.post<{ id_usuario: number }>(
       `${this.base}/usuario/registro`,
       payload
     );
+  }
+
+  logout() {
+    localStorage.removeItem('auth_user');
+    this.currentUserSubject.next(null);
+  }
+
+  get currentUser(): AuthUser | null {
+    return this.currentUserSubject.value;
+  }
+
+  get isLoggedIn(): boolean {
+    return !!this.currentUserSubject.value;
   }
 }

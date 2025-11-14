@@ -1,0 +1,23 @@
+<div class="flex items-start space-x-4 mb-6">
+  <img
+    [src]="'http://localhost:3000/public/images/' + producto.producto?.imagen_secundaria"
+    class="w-20 h-20 object-cover rounded"
+  />
+
+  <div class="flex-1">
+    <div class="flex justify-between items-start">
+      <div>
+        <h3 class="text-gray-700 font-semibold">
+          {{ producto.producto?.nombre }}
+        </h3>
+        <p class="text-gray-500 text-sm mt-1">
+          {{ producto.producto?.descripcion }}
+        </p>
+      </div>
+
+      <p class="text-gray-700 font-medium">
+        {{ producto.precio | currency:'ARS':'symbol':'1.2-2':'es-AR' }}
+      </p>
+    </div>
+  </div>
+</div>

@@ -1,5 +1,6 @@
 // src/app/app.routes.ts
 import { Routes } from '@angular/router';
+import { authGuard } from './modules/auth/auth.guard';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -18,10 +19,10 @@ export const routes: Routes = [
 
     {
     path: 'pedidos',
+    canActivate: [authGuard],
     loadChildren: () =>
       import('./modules/pedidos/pedidos.routes').then(m => m.pedidosRoutes)
   },
-
 
   {
     path: 'auth',
