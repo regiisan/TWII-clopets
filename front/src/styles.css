@@ -6,3 +6,13 @@
 * {
   font-family: 'Montserrat', sans-serif;
 }
+
+input, select, textarea {
+  @apply bg-white text-neutral-900 placeholder:text-neutral-400;
+}
+
+.dark input,
+.dark select,
+.dark textarea {
+  @apply bg-white text-neutral-900 placeholder:text-neutral-400;
+}
