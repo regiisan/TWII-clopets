@@ -1,0 +1,37 @@
+<div class="border rounded-lg shadow-sm p-6 mb-6">
+  <div class="flex justify-between items-center mb-4">
+    <div class="space-y-1">
+      <p class="text-gray-700 text-sm">N° de pedido</p>
+      <p class="text-gray-500 font-medium">{{ pedido.id_pedido }}</p>
+    </div>
+
+    <div class="space-y-1">
+      <p class="text-gray-700 text-sm">Fecha</p>
+      <p class="text-gray-500 font-medium">{{ pedido.fecha | date:'dd/MM/yyyy'}}</p>
+    </div>
+
+    <div class="space-y-1">
+      <p class="text-gray-700 text-sm">Total</p>
+      <p class="text-gray-500 font-medium">
+        {{ pedido.total | currency:'ARS':'symbol':'1.2-2':'es-AR' }}
+      </p>
+    </div>
+
+    <div class="space-y-1">
+      <p class="text-gray-700 text-sm">Estado</p>
+      <p class="text-gray-500 font-medium">{{ pedido.estado }}</p>
+    </div>
+
+    <button class="text-gray-500 border border-gray-300 px-3 py-1 rounded hover:bg-gray-50">
+      Ver orden
+    </button>
+  </div>
+
+  <hr class="my-4">
+
+  <!-- Lista de productos -->
+  <app-productos-pedido
+    *ngFor="let producto of pedido.productos"
+    [producto]="producto">
+  </app-productos-pedido>
+</div>

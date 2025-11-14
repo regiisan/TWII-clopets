@@ -1,0 +1,62 @@
+<div class="min-h-screen bg-neutral-900 text-white px-4 py-36 flex justify-center">
+  <div class="w-full max-w-3xl bg-neutral-800/60 backdrop-blur-xl border border-white/10 rounded-2xl p-8 pb-4 shadow-xl">
+    <!-- Header -->
+    <div class="flex items-center gap-5 mb-8">
+      <div
+        class="w-20 h-20 rounded-full bg-gradient-to-br from-indigo-500 via-fuchsia-500 to-orange-400 p-[3px]">
+        <div
+          class="w-full h-full rounded-full bg-neutral-900 flex items-center justify-center text-3xl font-bold">
+          {{ (user$ | async)?.nombre?.[0] | uppercase }}
+        </div>
+      </div>
+
+      <div>
+        <h1 class="text-3xl font-extrabold">Mi cuenta</h1>
+        <p class="text-neutral-400 mt-1">Gestioná tu perfil y preferencias</p>
+      </div>
+    </div>
+
+    <!-- Info -->
+    <div *ngIf="user$ | async as user; else noUser" class="space-y-6">
+
+      <div class="bg-neutral-900/60 p-5 rounded-xl border border-white/5">
+        <p class="text-neutral-400 text-xs uppercase tracking-wide">Nombre</p>
+        <p class="text-lg font-medium">{{ user.nombre }} {{ user.apellido }}</p>
+      </div>
+
+      <div class="bg-neutral-900/60 p-5 rounded-xl border border-white/5">
+        <p class="text-neutral-400 text-xs uppercase tracking-wide">Email</p>
+        <p class="text-lg font-medium">{{ user.email }}</p>
+      </div>
+
+      <div class="bg-neutral-900/60 p-5 rounded-xl border border-white/5">
+        <p class="text-neutral-400 text-xs uppercase tracking-wide">Dirección</p>
+        <p class="text-lg font-medium">{{ user.direccion || 'Sin dirección cargada' }}</p>
+      </div>
+
+      <!-- Badges -->
+      <div class="flex gap-3 pt-3">
+        <span class="px-3 py-1 rounded-full text-xs bg-indigo-500/20 text-indigo-300 border border-indigo-500/40">
+          Cliente CloPets
+        </span>
+        <span class="px-3 py-1 rounded-full text-xs bg-neutral-700/40 border border-white/10">
+          ID: {{ user.id_usuario }}
+        </span>
+      </div>
+
+      <!-- Logout Button -->
+      <button
+        (click)="logout()"
+        class="mt-4 w-full sm:w-auto px-6 py-3 rounded-xl bg-gradient-to-r from-rose-500 to-orange-500 font-semibold shadow-lg shadow-rose-500/20 hover:brightness-110 transition">
+        Cerrar sesión
+      </button>
+
+    </div>
+
+    <!-- No user -->
+    <ng-template #noUser>
+      <p class="text-neutral-400 text-center py-10">El usuario no está logueado.</p>
+    </ng-template>
+
+  </div>
+</div>

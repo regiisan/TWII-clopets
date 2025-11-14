@@ -89,8 +89,13 @@ enum animal {
 }
 
 enum clasificacion {
-  pa_uelo @map("pañuelo")
+  panuelo
   sweater
+  bota
+  campera
+  buzo
+  collar
+  remera
 }
 
 enum talle {

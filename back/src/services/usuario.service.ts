@@ -1,35 +1,22 @@
-import type { Usuario } from "../models/usuario.model.js";
+import bcrypt from 'bcrypt';
 import type { UsuarioRepository } from "../repository/usuario.repository.js";
 
 export class UsuarioService {
-
-  constructor(private usuarioRepository: UsuarioRepository) { }
+  constructor(private usuarioRepository: UsuarioRepository) {}
 
   async obtenerUsuarios() {
-    return await this.usuarioRepository.findAllUsuarios();
+    return this.usuarioRepository.findAllUsuarios();
   }
 
   async obtenerUsuario(id: number) {
-    return await this.usuarioRepository.findUsuarioById(id);
+    return this.usuarioRepository.findUsuarioById(id);
   }
 
   async crearUsuario(usuario: { nombre: string; apellido: string; email: string; contrase_a: string; direccion?: string }) {
     const { nombre, apellido, email, contrase_a, direccion } = usuario;
 
-    if (!nombre || typeof nombre !== 'string') {
-      throw new Error('El nombre es obligatorio y debe ser un string');
-    }
-
-    if (!apellido || typeof apellido !== 'string') {
-      throw new Error('El apellido es obligatorio y debe ser un string');
-    }
-
-    if (!email || typeof email !== 'string') {
-      throw new Error('El email es obligatorio y debe ser un string');
-    }
-
-    if (!contrase_a || typeof contrase_a !== 'string' || contrase_a.length < 6) {
-      throw new Error('La contraseña es obligatoria y debe tener al menos 6 caracteres');
+    if (!nombre || !apellido || !email || !contrase_a) {
+      throw new Error('Todos los campos son obligatorios');
     }
 
     const existingUser = await this.usuarioRepository.findUsuarioByEmail(email);
@@ -37,11 +24,14 @@ export class UsuarioService {
       throw new Error('El email ya está registrado');
     }
 
+    
+    const hashedPassword = await bcrypt.hash(contrase_a, 10);
+
     return await this.usuarioRepository.createUsuario({
       nombre,
       apellido,
-      email,
-      contrase_a,
+      email: email.trim().toLowerCase(),
+      contrase_a: hashedPassword,
       ...(direccion && { direccion })
     });
   }
@@ -51,13 +41,13 @@ export class UsuarioService {
       throw new Error('Email y contraseña son requeridos');
     }
 
-    const usuario = await this.usuarioRepository.findUsuarioByEmail(email);
-    
+    const usuario = await this.usuarioRepository.findUsuarioByEmail(email.trim().toLowerCase());
     if (!usuario) {
       throw new Error('Credenciales inválidas');
     }
 
-    if (usuario.contrase_a !== contrase_a) {
+    const match = await bcrypt.compare(contrase_a, usuario.contrase_a);
+    if (!match) {
       throw new Error('Credenciales inválidas');
     }
 
@@ -66,6 +56,9 @@ export class UsuarioService {
   }
 
   async actualizarUsuario(id: number, data: { nombre?: string; apellido?: string; email?: string; contrase_a?: string; direccion?: string }) {
+    if (data.contrase_a) {
+      data.contrase_a = await bcrypt.hash(data.contrase_a, 10);
+    }
     return await this.usuarioRepository.updateUsuario(id, data);
   }
 
