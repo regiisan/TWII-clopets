@@ -98,7 +98,7 @@ export class ListProductosComponent implements OnInit, OnDestroy {
       error: () => {
         this.loading = false;
         this.messageService.add({severity: 'error', summary: 'Error', detail: 'Error al cargar los productos'});
-      }
+      } 
     });
   }
 

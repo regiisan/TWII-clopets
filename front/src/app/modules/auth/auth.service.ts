@@ -26,7 +26,7 @@ export class AuthService {
       contrase_a: dto.password,  
     };
     return this.http.post<{ token: string; user: any }>(
-      `${this.base}/api/usuario/login`,
+      `${this.base}/usuario/login`,
       payload
     );
   }
@@ -40,7 +40,7 @@ export class AuthService {
       direccion: dto.direccion ?? null,
     };
     return this.http.post<{ id_usuario: number }>(
-      `${this.base}/api/usuario/registro`,
+      `${this.base}/usuario/registro`,
       payload
     );
   }

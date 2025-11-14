@@ -16,6 +16,13 @@ export const routes: Routes = [
       import('./modules/productos/productos.routes').then(m => m.productoRoutes)
   },
 
+    {
+    path: 'pedidos',
+    loadChildren: () =>
+      import('./modules/pedidos/pedidos.routes').then(m => m.pedidosRoutes)
+  },
+
+
   {
     path: 'auth',
     loadChildren: () =>
