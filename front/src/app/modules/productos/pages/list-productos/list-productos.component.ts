@@ -1,11 +1,13 @@
 import { Component, OnDestroy, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 import { ToastModule } from 'primeng/toast';
 import { Toast } from 'primeng/toast';
 import { MessageService } from 'primeng/api';
 import { TableModule } from 'primeng/table';
 import { CardModule } from 'primeng/card';
+import { take } from 'rxjs/operators';
 import { ProductosService, ProductosResponse } from '../../../../api/services/productos/productos.service';
 import { Producto } from '../../interfaces/producto.interface';
 import { CardProductosList } from '../../../productos/components/card-productos-list/card-productos-list';
@@ -24,6 +26,7 @@ export class ListProductosComponent implements OnInit, OnDestroy {
   private fb = inject(FormBuilder);
   private productoService = inject(ProductosService);
   private messageService = inject(MessageService);
+  private activatedRoute = inject(ActivatedRoute);
 
   spinner = true;
 
@@ -55,6 +58,16 @@ export class ListProductosComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.cargarFacetas();
+    
+    // Leer query params una sola vez al inicializar
+    this.activatedRoute.queryParams.pipe(take(1)).subscribe(params => {
+      if (params['clasificacion']) {
+        this.form.patchValue({
+          clasificacion: [params['clasificacion']]
+        });
+      }
+    });
+    
     this.listarProductos();  
     this.form.valueChanges.subscribe(() => {
       this.page = 1;
