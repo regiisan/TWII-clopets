@@ -3,6 +3,7 @@ import { inject, Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { environment } from '../../../../environments/environment';
 import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { Producto } from '../../../modules/productos/interfaces/producto.interface';
 
 export type ProductosQuery = {
@@ -26,11 +27,38 @@ export interface ProductosResponse {
 @Injectable({ providedIn: 'root' })
 export class ProductosService {
   private http = inject(HttpClient);
-  private base = environment.api_url; // ej: http://localhost:3000
+  private base = environment.api_url; // ej: http://localhost:3000/api
+  private baseUrl = environment.api_url.replace('/api', ''); // ej: http://localhost:3000
+
+  private procesarURLsImagenes(producto: Producto): Producto {
+    return {
+      ...producto,
+      imagen_principal: this.construirURLImagen(producto.imagen_principal),
+      imagen_secundaria: this.construirURLImagen(producto.imagen_secundaria),
+    };
+  }
+
+  private construirURLImagen(ruta?: string): string | undefined {
+    if (!ruta) return undefined;
+    if (ruta.startsWith('http')) return ruta;
+    return `${this.baseUrl}/public/${ruta}`;
+  }
 
   /** Versión simple (compatibilidad con lo que ya tenías) */
   listProductos(): Observable<Producto[]> {
-    return this.http.get<Producto[]>(`${this.base}/producto`);
+    return this.http.get<any>(`${this.base}/producto`).pipe(
+      map(data => {
+        // Si es un array directamente
+        if (Array.isArray(data)) {
+          return (data as Producto[]).map(p => this.procesarURLsImagenes(p));
+        }
+        // Si es un objeto con items (ProductosResponse)
+        if (data && data.items && Array.isArray(data.items)) {
+          return (data.items as Producto[]).map(p => this.procesarURLsImagenes(p));
+        }
+        return [];
+      })
+    );
   }
 
   /** Versión con filtros/orden/paginación */
@@ -46,7 +74,12 @@ export class ProductosService {
       .set('page', String(query.page ?? 1))
       .set('pageSize', String(query.pageSize ?? 12));
 
-    return this.http.get<ProductosResponse>(`${this.base}/producto`, { params });
+    return this.http.get<ProductosResponse>(`${this.base}/producto`, { params }).pipe(
+      map(response => ({
+        ...response,
+        items: (response.items as Producto[]).map(p => this.procesarURLsImagenes(p))
+      }))
+    );
   }
 
   getProductosHome() {

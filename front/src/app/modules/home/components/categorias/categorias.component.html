@@ -1,0 +1,41 @@
+<section class="py-16 px-4 bg-white">
+  <div class="max-w-6xl mx-auto">
+    <h2 class="text-4xl font-bold text-center mb-4 text-gray-800">Categorías</h2>
+    <p class="text-center text-gray-600 mb-12">Explora nuestras colecciones por tipo de prenda</p>
+
+    <!-- Loading -->
+    <div *ngIf="loading" class="text-center py-12">
+      <div class="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-blue-500"></div>
+      <p class="mt-4 text-gray-600">Cargando categorías...</p>
+    </div>
+
+    <!-- Error -->
+    <div *ngIf="error" class="text-center py-8 bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded">
+      <p>{{ error }}</p>
+      <button (click)="cargarCategorias()" class="mt-2 bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded">
+        Reintentar
+      </button>
+    </div>
+
+    <!-- Grid de Categorías -->
+    <div *ngIf="!loading && !error && categorias.length > 0" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div
+        *ngFor="let categoria of categorias"
+        (click)="irACategoria(categoria.nombre)"
+        class="cursor-pointer group">
+        <div class="bg-gradient-to-br from-indigo-400 to-indigo-600 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 p-8 text-center text-white h-48 flex flex-col items-center justify-center">
+          <h3 class="text-2xl font-bold capitalize mb-2">{{ categoria.nombre }}</h3>
+          <p class="text-sm opacity-90">{{ categoria.count }} productos</p>
+          <div class="mt-4 text-xs font-semibold opacity-0 group-hover:opacity-100 transition-opacity">
+            Ver colección →
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Sin categorías -->
+    <div *ngIf="!loading && !error && categorias.length === 0" class="text-center py-12">
+      <p class="text-gray-600">No hay categorías disponibles</p>
+    </div>
+  </div>
+</section>

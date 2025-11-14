@@ -1,0 +1,11 @@
+/* Estilos opcionales para personalización adicional */
+:host ::ng-deep {
+  section {
+    background: linear-gradient(to bottom, #ffffff, #f9fafb);
+  }
+}
+
+/* Efecto hover mejorado */
+div[class*="cursor-pointer"] {
+  transition: transform 0.3s ease;
+}

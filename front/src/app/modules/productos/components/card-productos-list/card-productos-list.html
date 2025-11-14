@@ -2,15 +2,20 @@
   <ng-template pTemplate="header">
     <div class="relative w-full h-[500px] group overflow-hidden">
       <img
-        [src]="'http://localhost:3000/public/images/' + producto.imagen_principal"
+        *ngIf="producto.imagen_principal"
+        [src]="producto.imagen_principal"
         [alt]="producto.nombre"
         class="w-full h-full object-cover transition-opacity duration-500 group-hover:opacity-0"
       />
       <img
-        [src]="'http://localhost:3000/public/images/' + producto.imagen_secundaria"
+        *ngIf="producto.imagen_secundaria"
+        [src]="producto.imagen_secundaria"
         [alt]="producto.nombre"
         class="absolute top-0 left-0 w-full h-full object-cover transition-opacity duration-500 opacity-0 group-hover:opacity-100"
       />
+      <div *ngIf="!producto.imagen_principal" class="w-full h-full bg-gray-200 flex items-center justify-center">
+        <span class="text-gray-400">Sin imagen</span>
+      </div>
     </div>
   </ng-template>
 
