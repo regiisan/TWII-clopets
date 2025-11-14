@@ -1,0 +1,207 @@
+[
+  {
+    "_id": "registro-usuario",
+    "colId": "clopets-collection",
+    "containerId": "usuarios-folder",
+    "name": "Registrar Usuario",
+    "url": "http://localhost:3000/api/usuario/registro",
+    "method": "POST",
+    "sortNum": 10000,
+    "created": "2025-11-11T00:00:00.000Z",
+    "modified": "2025-11-11T00:00:00.000Z",
+    "headers": [
+      {
+        "name": "Content-Type",
+        "value": "application/json"
+      }
+    ],
+    "body": {
+      "type": "json",
+      "raw": "{\n  \"nombre\": \"Juan\",\n  \"apellido\": \"Pérez\",\n  \"email\": \"juan.perez@example.com\",\n  \"contrase_a\": \"miPassword123\",\n  \"direccion\": \"Calle Falsa 123\"\n}",
+      "form": []
+    },
+    "tests": []
+  },
+  {
+    "_id": "login-usuario",
+    "colId": "clopets-collection",
+    "containerId": "usuarios-folder",
+    "name": "Login Usuario",
+    "url": "http://localhost:3000/api/usuario/login",
+    "method": "POST",
+    "sortNum": 20000,
+    "created": "2025-11-11T00:00:00.000Z",
+    "modified": "2025-11-11T00:00:00.000Z",
+    "headers": [
+      {
+        "name": "Content-Type",
+        "value": "application/json"
+      }
+    ],
+    "body": {
+      "type": "json",
+      "raw": "{\n  \"email\": \"juan.perez@example.com\",\n  \"contrase_a\": \"miPassword123\"\n}",
+      "form": []
+    },
+    "tests": []
+  },
+  {
+    "_id": "listar-productos",
+    "colId": "clopets-collection",
+    "containerId": "productos-folder",
+    "name": "Listar Productos",
+    "url": "http://localhost:3000/api/producto",
+    "method": "GET",
+    "sortNum": 10000,
+    "created": "2025-11-11T00:00:00.000Z",
+    "modified": "2025-11-11T00:00:00.000Z",
+    "headers": [],
+    "body": {
+      "type": "json",
+      "raw": "",
+      "form": []
+    },
+    "tests": []
+  },
+  {
+    "_id": "filtrar-productos",
+    "colId": "clopets-collection",
+    "containerId": "productos-folder",
+    "name": "Filtrar Productos (categoria, talle, precio)",
+    "url": "http://localhost:3000/api/producto?categoria=ropa&talle=M&precioMin=5000&precioMax=20000",
+    "method": "GET",
+    "sortNum": 20000,
+    "created": "2025-11-11T00:00:00.000Z",
+    "modified": "2025-11-11T00:00:00.000Z",
+    "headers": [],
+    "body": {
+      "type": "json",
+      "raw": "",
+      "form": []
+    },
+    "tests": []
+  },
+  {
+    "_id": "agregar-al-carrito",
+    "colId": "clopets-collection",
+    "containerId": "carrito-folder",
+    "name": "Agregar Producto al Carrito",
+    "url": "http://localhost:3000/api/carrito",
+    "method": "POST",
+    "sortNum": 10000,
+    "created": "2025-11-11T00:00:00.000Z",
+    "modified": "2025-11-11T00:00:00.000Z",
+    "headers": [
+      {
+        "name": "Content-Type",
+        "value": "application/json"
+      }
+    ],
+    "body": {
+      "type": "json",
+      "raw": "{\n  \"id_usuario\": 1,\n  \"id_producto\": 1,\n  \"talle\": \"M\",\n  \"cantidad\": 2\n}",
+      "form": []
+    },
+    "tests": []
+  },
+  {
+    "_id": "ver-carrito",
+    "colId": "clopets-collection",
+    "containerId": "carrito-folder",
+    "name": "Ver Carrito del Usuario",
+    "url": "http://localhost:3000/api/carrito/1",
+    "method": "GET",
+    "sortNum": 20000,
+    "created": "2025-11-11T00:00:00.000Z",
+    "modified": "2025-11-11T00:00:00.000Z",
+    "headers": [],
+    "body": {
+      "type": "json",
+      "raw": "",
+      "form": []
+    },
+    "tests": []
+  },
+  {
+    "_id": "actualizar-carrito",
+    "colId": "clopets-collection",
+    "containerId": "carrito-folder",
+    "name": "Actualizar Cantidad en Carrito",
+    "url": "http://localhost:3000/api/carrito/1",
+    "method": "PUT",
+    "sortNum": 30000,
+    "created": "2025-11-11T00:00:00.000Z",
+    "modified": "2025-11-11T00:00:00.000Z",
+    "headers": [
+      {
+        "name": "Content-Type",
+        "value": "application/json"
+      }
+    ],
+    "body": {
+      "type": "json",
+      "raw": "{\n  \"cantidad\": 3\n}",
+      "form": []
+    },
+    "tests": []
+  },
+  {
+    "_id": "eliminar-del-carrito",
+    "colId": "clopets-collection",
+    "containerId": "carrito-folder",
+    "name": "Eliminar Producto del Carrito",
+    "url": "http://localhost:3000/api/carrito/1",
+    "method": "DELETE",
+    "sortNum": 40000,
+    "created": "2025-11-11T00:00:00.000Z",
+    "modified": "2025-11-11T00:00:00.000Z",
+    "headers": [],
+    "body": {
+      "type": "json",
+      "raw": "",
+      "form": []
+    },
+    "tests": []
+  },
+  {
+    "_id": "crear-pedido",
+    "colId": "clopets-collection",
+    "containerId": "pedidos-folder",
+    "name": "Crear Pedido desde Carrito",
+    "url": "http://localhost:3000/api/pedido",
+    "method": "POST",
+    "sortNum": 10000,
+    "created": "2025-11-11T00:00:00.000Z",
+    "modified": "2025-11-11T00:00:00.000Z",
+    "headers": [
+      {
+        "name": "Content-Type",
+        "value": "application/json"
+      }
+    ],
+    "body": {
+      "type": "json",
+      "raw": "{\n  \"id_usuario\": 1\n}",
+      "form": []
+    },
+    "tests": []
+  },
+  {
+    "_id": "listar-pedidos",
+    "colId": "clopets-collection",
+    "containerId": "pedidos-folder",
+    "name": "Listar Pedidos del Usuario",
+    "url": "http://localhost:3000/api/pedido/1",
+    "method": "GET",
+    "sortNum": 20000,
+    "created": "2025-11-11T00:00:00.000Z",
+    "modified": "2025-11-11T00:00:00.000Z",
+    "headers": [],
+    "body": {
+      "type": "json",
+      "raw": "",
+      "form": []
+    },
+    "tests": []
+  }
+]

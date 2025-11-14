@@ -1,5 +1,5 @@
-import { ProductoRepository } from "../repository/producto.repository.js";
-import {type ProductoFilter } from "../models/productoFilter.types.js";
+import { type ProductoRepository } from "../repository/producto.repository.js";
+import {type ProductoFilter } from "../models/productoFilter.model.js";
 
 export class ProductoService {
     

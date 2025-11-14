@@ -1,12 +1,12 @@
 import { prisma } from "../prisma.js";
-import { type ProductoFilter } from "../models/productoFilter.types.js";
+import { type ProductoFilter } from "../models/productoFilter.model.js";
 
 export class ProductoRepository {
   async findAllProductos(filters: ProductoFilter = {}) {
     const { clasificacion, animal, minPrecio, maxPrecio } = filters;
 
-    const where = {
-      ...(clasificacion && { clasificacion }),
+    const where: any = {
+      ...(clasificacion && { clasificacion: clasificacion === "pañuelo" ? "pa_uelo" : clasificacion }),
       ...(animal && { animal }),
       ...((minPrecio !== undefined || maxPrecio !== undefined) && {
         precio: {
