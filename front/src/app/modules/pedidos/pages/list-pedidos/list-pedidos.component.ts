@@ -10,6 +10,7 @@ import { Spinner } from '../../../../shared/spinner/spinner';
 
 @Component({
   selector: 'app-list-pedidos',
+  standalone: true, 
   imports: [CommonModule, CardPedidosComponent, ProgressSpinnerModule, Spinner],
   templateUrl: './list-pedidos.component.html',
   styleUrls: ['./list-pedidos.component.css'],
