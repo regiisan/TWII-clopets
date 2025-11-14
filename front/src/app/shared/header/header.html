@@ -1,22 +1,16 @@
 <header
-  class="sticky top-0 z-50 backdrop-blur supports-[backdrop-filter]:bg-white/70 dark:supports-[backdrop-filter]:bg-neutral-900/60 bg-white/90 dark:bg-neutral-900/80 border-b border-black/5 dark:border-white/10"
->
+  class="sticky top-0 z-50 backdrop-blur supports-[backdrop-filter]:bg-white/70 dark:supports-[backdrop-filter]:bg-neutral-900/60 bg-white/90 dark:bg-neutral-900/80 border-b border-black/5 dark:border-white/10">
   <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
     <div class="flex h-16 items-center justify-between">
       <!-- Brand -->
       <a routerLink="/home" class="flex items-center gap-3" (click)="close()">
         <span
-          class="inline-grid place-items-center w-9 h-9 rounded-xl bg-gradient-to-br from-indigo-500 to-fuchsia-500 text-white font-bold"
-        >
+          class="inline-grid place-items-center w-9 h-9 rounded-xl bg-gradient-to-br from-indigo-500 to-fuchsia-500 text-white font-bold">
           CP
         </span>
         <div class="leading-tight">
-          <span class="block font-extrabold text-neutral-900 dark:text-white tracking-tight"
-            >CloPets</span
-          >
-          <span class="block text-xs text-neutral-500 dark:text-neutral-400 -mt-0.5"
-            >Tienda para mascotas</span
-          >
+          <span class="block font-extrabold text-neutral-900 dark:text-white tracking-tight">CloPets</span>
+          <span class="block text-xs text-neutral-500 dark:text-neutral-400 -mt-0.5">Tienda para mascotas</span>
         </div>
       </a>
 
@@ -26,62 +20,40 @@
           routerLink="/home"
           routerLinkActive="text-indigo-600 dark:text-indigo-400"
           [routerLinkActiveOptions]="{ exact: true }"
-          class="text-sm font-medium text-neutral-700 dark:text-neutral-200 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors"
-        >
+          class="text-sm font-medium text-neutral-700 dark:text-neutral-200 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">
           Inicio
         </a>
 
         <a
           routerLink="/productos"
           routerLinkActive="text-indigo-600 dark:text-indigo-400"
-          class="text-sm font-medium text-neutral-700 dark:text-neutral-200 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors"
-        >
+          class="text-sm font-medium text-neutral-700 dark:text-neutral-200 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">
           Productos
         </a>
 
         <a
           routerLink="/contacto"
-          class="text-sm font-medium text-neutral-700 dark:text-neutral-200 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors"
-        >
+          class="text-sm font-medium text-neutral-700 dark:text-neutral-200 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">
           Contacto
-        </a>
-
-        <a
-          *ngIf="currentUser$ | async"
-          routerLink="/pedidos"
-          class="text-sm font-medium text-neutral-700 dark:text-neutral-200 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors"
-        >
-          Pedidos
         </a>
 
         <!-- Carrito (desktop) -->
         <button
           type="button"
           class="relative inline-flex items-center justify-center rounded-full p-2 hover:bg-neutral-900/5 dark:hover:bg-white/10 transition"
-          (click)="toggleCart()"
-        >
+          (click)="toggleCart()">
           <!-- icono -->
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            class="h-5 w-5 text-neutral-800 dark:text-neutral-100"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="1.8"
-              d="M3 3h2l.4 2M7 13h10l3-8H6.4M7 13L5.4 5M7 13l-2 7h14m-8 0a1.5 1.5 0 11-3 0m10 0a1.5 1.5 0 11-3 0"
-            />
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-neutral-800 dark:text-neutral-100"
+               fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"
+                  d="M3 3h2l.4 2M7 13h10l3-8H6.4M7 13L5.4 5M7 13l-2 7h14m-8 0a1.5 1.5 0 11-3 0m10 0a1.5 1.5 0 11-3 0"/>
           </svg>
 
           <!-- badge cantidad -->
           <ng-container *ngIf="(carrito$ | async)?.totalItems as count">
             <span
               *ngIf="count > 0"
-              class="absolute -top-0.5 -right-0.5 min-w-[18px] h-[18px] rounded-full bg-red-500 text-white text-[10px] leading-[18px] text-center font-semibold"
-            >
+              class="absolute -top-0.5 -right-0.5 min-w-[18px] h-[18px] rounded-full bg-red-500 text-white text-[10px] leading-[18px] text-center font-semibold">
               {{ count }}
             </span>
           </ng-container>
@@ -92,8 +64,7 @@
           <!-- Si NO hay usuario -> botón Ingresar -->
           <a
             routerLink="/auth/login"
-            class="inline-flex items-center rounded-xl border border-neutral-200/70 dark:border-neutral-700 px-3.5 py-2 text-sm font-semibold text-neutral-900 dark:text-white hover:bg-neutral-50 dark:hover:bg-neutral-800 transition"
-          >
+            class="inline-flex items-center rounded-xl border border-neutral-200/70 dark:border-neutral-700 px-3.5 py-2 text-sm font-semibold text-neutral-900 dark:text-white hover:bg-neutral-50 dark:hover:bg-neutral-800 transition">
             Ingresar
           </a>
         </ng-container>
@@ -104,11 +75,9 @@
             <button
               type="button"
               (click)="toggleUserMenu()"
-              class="inline-flex items-center gap-2 rounded-full bg-neutral-900/5 dark:bg-white/10 px-3 py-1.5 hover:bg-neutral-900/10 dark:hover:bg-white/20 transition"
-            >
+              class="inline-flex items-center gap-2 rounded-full bg-neutral-900/5 dark:bg-white/10 px-3 py-1.5 hover:bg-neutral-900/10 dark:hover:bg-white/20 transition">
               <div
-                class="w-8 h-8 rounded-full bg-indigo-500 text-white flex items-center justify-center text-xs font-semibold"
-              >
+                class="w-8 h-8 rounded-full bg-indigo-500 text-white flex items-center justify-center text-xs font-semibold">
                 {{ (currentUser$ | async)?.nombre?.[0] | uppercase }}
               </div>
               <span class="text-sm text-neutral-800 dark:text-neutral-100">
@@ -119,19 +88,16 @@
             <!-- Menú usuario -->
             <div
               *ngIf="userMenuOpen()"
-              class="absolute right-0 mt-2 w-44 rounded-xl bg-white dark:bg-neutral-900 border border-neutral-200/70 dark:border-neutral-700 shadow-lg overflow-hidden z-50"
-            >
+              class="absolute right-0 mt-2 w-44 rounded-xl bg-white dark:bg-neutral-900 border border-neutral-200/70 dark:border-neutral-700 shadow-lg overflow-hidden z-50">
               <a
                 routerLink="/auth/perfil"
                 (click)="closeUserMenu()"
-                class="block px-4 py-2 text-sm text-neutral-800 dark:text-neutral-100 hover:bg-neutral-50 dark:hover:bg-neutral-800"
-              >
+                class="block px-4 py-2 text-sm text-neutral-800 dark:text-neutral-100 hover:bg-neutral-50 dark:hover:bg-neutral-800">
                 Mi cuenta
               </a>
               <button
                 (click)="logout()"
-                class="w-full text-left block px-4 py-2 text-sm text-red-500 hover:bg-neutral-50 dark:hover:bg-neutral-800"
-              >
+                class="w-full text-left block px-4 py-2 text-sm text-red-500 hover:bg-neutral-50 dark:hover:bg-neutral-800">
                 Cerrar sesión
               </button>
             </div>
@@ -143,38 +109,16 @@
       <button
         type="button"
         class="md:hidden inline-flex items-center justify-center rounded-xl p-2 hover:bg-neutral-100 dark:hover:bg-neutral-800"
-        (click)="toggle()"
-        aria-label="Abrir menú"
-      >
-        <svg
-          *ngIf="!open()"
-          xmlns="http://www.w3.org/2000/svg"
-          class="h-6 w-6"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-        >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="1.5"
-            d="M3.75 6.75h16.5M3.75 12h16.5M3.75 17.25h16.5"
-          />
+        (click)="toggle()" aria-label="Abrir menú">
+        <svg *ngIf="!open()" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+             stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                d="M3.75 6.75h16.5M3.75 12h16.5M3.75 17.25h16.5"/>
         </svg>
-        <svg
-          *ngIf="open()"
-          xmlns="http://www.w3.org/2000/svg"
-          class="h-6 w-6"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-        >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="1.5"
-            d="M6 18L18 6M6 6l12 12"
-          />
+        <svg *ngIf="open()" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+             stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                d="M6 18L18 6M6 6l12 12"/>
         </svg>
       </button>
     </div>
@@ -185,28 +129,24 @@
         <a
           routerLink="/home"
           (click)="close()"
-          class="rounded-lg px-3 py-2 text-sm font-medium text-neutral-800 dark:text-neutral-200 hover:bg-neutral-100 dark:hover:bg-neutral-800"
-        >
+          class="rounded-lg px-3 py-2 text-sm font-medium text-neutral-800 dark:text-neutral-200 hover:bg-neutral-100 dark:hover:bg-neutral-800">
           Inicio
         </a>
         <a
           routerLink="/productos"
           (click)="close()"
-          class="rounded-lg px-3 py-2 text-sm font-medium text-neutral-800 dark:text-neutral-200 hover:bg-neutral-100 dark:hover:bg-neutral-800"
-        >
+          class="rounded-lg px-3 py-2 text-sm font-medium text-neutral-800 dark:text-neutral-200 hover:bg-neutral-100 dark:hover:bg-neutral-800">
           Productos
         </a>
         <a
           routerLink="/contacto"
           (click)="close()"
-          class="rounded-lg px-3 py-2 text-sm font-medium text-neutral-800 dark:text-neutral-200 hover:bg-neutral-100 dark:hover:bg-neutral-800"
-        >
+          class="rounded-lg px-3 py-2 text-sm font-medium text-neutral-800 dark:text-neutral-200 hover:bg-neutral-100 dark:hover:bg-neutral-800">
           Contacto
         </a>
         <a
           (click)="toggleCart(); close()"
-          class="rounded-lg px-3 py-2 text-sm font-medium text-neutral-800 dark:text-neutral-200 hover:bg-neutral-100 dark:hover:bg-neutral-800 cursor-pointer"
-        >
+          class="rounded-lg px-3 py-2 text-sm font-medium text-neutral-800 dark:text-neutral-200 hover:bg-neutral-100 dark:hover:bg-neutral-800 cursor-pointer">
           Carrito
         </a>
 
@@ -215,8 +155,7 @@
           <a
             routerLink="/auth/login"
             (click)="close()"
-            class="rounded-lg px-3 py-2 text-sm font-semibold text-neutral-900 dark:text-white ring-1 ring-neutral-200/70 dark:ring-neutral-700 hover:bg-neutral-50 dark:hover:bg-neutral-800"
-          >
+            class="rounded-lg px-3 py-2 text-sm font-semibold text-neutral-900 dark:text-white ring-1 ring-neutral-200/70 dark:ring-neutral-700 hover:bg-neutral-50 dark:hover:bg-neutral-800">
             Ingresar
           </a>
         </ng-container>
@@ -225,14 +164,12 @@
           <a
             routerLink="/auth/perfil"
             (click)="close()"
-            class="rounded-lg px-3 py-2 text-sm font-medium text-neutral-800 dark:text-neutral-200 hover:bg-neutral-100 dark:hover:bg-neutral-800"
-          >
+            class="rounded-lg px-3 py-2 text-sm font-medium text-neutral-800 dark:text-neutral-200 hover:bg-neutral-100 dark:hover:bg-neutral-800">
             Mi cuenta
           </a>
           <button
             (click)="logout()"
-            class="rounded-lg px-3 py-2 text-sm font-semibold text-red-500 hover:bg-neutral-100 dark:hover:bg-neutral-800 text-left"
-          >
+            class="rounded-lg px-3 py-2 text-sm font-semibold text-red-500 hover:bg-neutral-100 dark:hover:bg-neutral-800 text-left">
             Cerrar sesión
           </button>
         </ng-template>
@@ -248,47 +185,40 @@
 
   <!-- drawer -->
   <div
-    class="absolute top-0 right-0 h-full w-full max-w-md bg-white dark:bg-neutral-950 shadow-2xl flex flex-col border-l border-white/10"
-  >
+    class="absolute top-0 right-0 h-full w-full max-w-md bg-white dark:bg-neutral-950 shadow-2xl flex flex-col border-l border-white/10">
+
     <!-- header drawer -->
     <div
-      class="flex items-center justify-between px-4 sm:px-6 py-4 border-b border-neutral-200/60 dark:border-neutral-800"
-    >
-      <h2 class="text-sm font-semibold text-neutral-900 dark:text-neutral-50">Tu carrito</h2>
+      class="flex items-center justify-between px-4 sm:px-6 py-4 border-b border-neutral-200/60 dark:border-neutral-800">
+      <h2 class="text-sm font-semibold text-neutral-900 dark:text-neutral-50">
+        Tu carrito
+      </h2>
       <button
         type="button"
         class="rounded-full p-1.5 hover:bg-neutral-100 dark:hover:bg-neutral-800"
-        (click)="closeCart()"
-      >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          class="h-4 w-4"
-          viewBox="0 0 20 20"
-          fill="currentColor"
-        >
-          <path
-            fill-rule="evenodd"
-            d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
-            clip-rule="evenodd"
-          />
+        (click)="closeCart()">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+          <path fill-rule="evenodd"
+                d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                clip-rule="evenodd"/>
         </svg>
       </button>
     </div>
 
     <!-- contenido carrito -->
     <div class="flex-1 overflow-y-auto">
-      <ng-container *ngIf="carrito$ | async as carrito">
+      <ng-container *ngIf="(carrito$ | async) as carrito">
         <ng-container *ngIf="carrito.items?.length; else emptyCart">
+
           <div
             *ngFor="let item of carrito.items"
-            class="flex gap-3 px-4 sm:px-6 py-3 border-b border-neutral-200/60 dark:border-neutral-800"
-          >
+            class="flex gap-3 px-4 sm:px-6 py-3 border-b border-neutral-200/60 dark:border-neutral-800">
+
             <!-- imagen -->
             <img
               [src]="'http://localhost:3000/public/images/' + item.producto.imagen_principal"
               [alt]="item.producto.nombre"
-              class="w-16 h-16 rounded-lg object-cover bg-neutral-100 dark:bg-neutral-800"
-            />
+              class="w-16 h-16 rounded-lg object-cover bg-neutral-100 dark:bg-neutral-800" />
 
             <!-- info -->
             <div class="flex-1">
@@ -299,10 +229,23 @@
                 Talle {{ item.talle }} · Cant: {{ item.cantidad }}
               </p>
               <p class="text-sm font-semibold mt-1 text-neutral-900 dark:text-neutral-100">
-                {{ item.subtotal | currency : 'ARS' : 'symbol' : '1.2-2' : 'es-AR' }}
+                {{ item.subtotal | currency:'ARS':'symbol':'1.2-2':'es-AR' }}
               </p>
             </div>
+
+            <!-- botón eliminar (resta 1 o borra) -->
+            <button
+              type="button"
+              class="self-start mt-1 rounded-full p-1.5 text-neutral-400 hover:text-red-500 hover:bg-neutral-100 dark:hover:bg-neutral-800 transition"
+              (click)="removeCartItem(item)">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" class="w-4 h-4" fill="currentColor">
+                <path fill-rule="evenodd"
+                      d="M8.5 3a1 1 0 00-.894.553L7.118 4.5H4.5a.75.75 0 000 1.5h.38l.623 8.082A2 2 0 007.497 16h5.006a2 2 0 001.994-1.918L15.12 6h.38a.75.75 0 000-1.5h-2.618l-.488-.947A1 1 0 0011.5 3h-3zm1.75 4.25a.75.75 0 10-1.5 0v5a.75.75 0 001.5 0v-5zm2.75 0a.75.75 0 10-1.5 0v5a.75.75 0 001.5 0v-5z"
+                      clip-rule="evenodd" />
+              </svg>
+            </button>
           </div>
+
         </ng-container>
       </ng-container>
 
@@ -319,14 +262,13 @@
       <div class="flex justify-between text-sm">
         <span class="text-neutral-500 dark:text-neutral-400">Subtotal</span>
         <span class="font-semibold text-neutral-900 dark:text-neutral-50">
-          {{ (carrito$ | async)?.totalAmount | currency : 'ARS' : 'symbol' : '1.2-2' : 'es-AR' }}
+          {{ (carrito$ | async)?.totalAmount | currency:'ARS':'symbol':'1.2-2':'es-AR' }}
         </span>
       </div>
 
       <button
         class="w-full bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-semibold py-2.5 rounded-lg transition disabled:bg-neutral-400"
-        [disabled]="!(carrito$ | async)?.items?.length"
-      >
+        [disabled]="!(carrito$ | async)?.items?.length">
         Finalizar compra
       </button>
     </div>
