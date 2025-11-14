@@ -26,7 +26,9 @@
           class="border rounded-md py-2 text-sm hover:border-gray-400 transition"
           [class.border-indigo-600]="t.stock > 0"
           [class.text-indigo-600]="t.stock > 0"
+          [class.border-indigo-600]="t.talle === talleSeleccionado"
           [disabled]="t.stock === 0"
+          (click)="seleccionarTalle(t.talle)"
         >
           {{ t.talle }}
         </button>

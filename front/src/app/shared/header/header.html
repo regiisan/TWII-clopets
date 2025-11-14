@@ -13,15 +13,20 @@
 
       <!-- Desktop nav -->
       <nav class="hidden md:flex items-center gap-6">
-        <a routerLink="/productos" routerLinkActive="text-indigo-600 dark:text-indigo-400"
-           class="text-sm font-medium text-neutral-700 dark:text-neutral-200 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">Productos</a>
+        <a routerLink="/home" routerLinkActive="text-indigo-600 dark:text-indigo-400" class="text-sm font-medium text-neutral-700 dark:text-neutral-200 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">
+           Inicio
+        </a>
 
-        <a routerLink="/carrito" class="text-sm font-medium text-neutral-700 dark:text-neutral-200 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">
-          Carrito
+        <a routerLink="/productos" routerLinkActive="text-indigo-600 dark:text-indigo-400" class="text-sm font-medium text-neutral-700 dark:text-neutral-200 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">
+           Productos
         </a>
 
         <a routerLink="/contacto" class="text-sm font-medium text-neutral-700 dark:text-neutral-200 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">
           Contacto
+        </a>
+
+        <a routerLink="/carrito" class="text-sm font-medium text-neutral-700 dark:text-neutral-200 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">
+          Carrito
         </a>
 
         <a routerLink="/auth/login"
@@ -45,6 +50,8 @@
     <!-- Mobile nav -->
     <div *ngIf="open()" class="md:hidden pb-4 animate-[fadeIn_.15s_ease-in]">
       <nav class="grid gap-2">
+        <a routerLink="/home" (click)="close()"
+           class="rounded-lg px-3 py-2 text-sm font-medium text-neutral-800 dark:text-neutral-200 hover:bg-neutral-100 dark:hover:bg-neutral-800">Inicio</a>
         <a routerLink="/productos" (click)="close()"
            class="rounded-lg px-3 py-2 text-sm font-medium text-neutral-800 dark:text-neutral-200 hover:bg-neutral-100 dark:hover:bg-neutral-800">Productos</a>
         <a routerLink="/carrito" (click)="close()"

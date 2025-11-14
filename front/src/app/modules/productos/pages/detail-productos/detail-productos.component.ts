@@ -13,13 +13,15 @@ import { GalleriaModule } from 'primeng/galleria';
   templateUrl: './detail-productos.component.html',
   styleUrl: './detail-productos.component.css',
 })
+
 export class DetailProductosComponent implements OnInit, OnDestroy {
   productoService = inject(ProductosService);
   activatedRouter = inject(ActivatedRoute);
   id: number | null = null;
   producto: Producto | undefined;
   talles: any[] = [];
-  openPanel: string | null = 'devoluciones'; 
+  talleSeleccionado: string | null = null;
+  openPanel: string | null = 'devoluciones';
 
   ngOnInit(): void {
     this.id = Number(this.activatedRouter.snapshot.paramMap.get('id'));
@@ -51,6 +53,10 @@ export class DetailProductosComponent implements OnInit, OnDestroy {
     });
   }
 
+  seleccionarTalle(talle: string) {
+    this.talleSeleccionado = talle;
+  }
+
   toggleAccordion(panelName: string): void {
     if (this.openPanel === panelName) {
       this.openPanel = null;
@@ -58,5 +64,4 @@ export class DetailProductosComponent implements OnInit, OnDestroy {
       this.openPanel = panelName;
     }
   }
-
 }

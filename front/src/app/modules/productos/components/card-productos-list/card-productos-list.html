@@ -1,4 +1,4 @@
-<p-card [ngClass]="'w-full shadow-sm custom-card'">
+<p-card [ngClass]="'w-full shadow-sm custom-card'" (click)="verProducto(producto)">
   <ng-template pTemplate="header">
     <div class="relative w-full h-[500px] group overflow-hidden">
       <img
@@ -15,7 +15,7 @@
   </ng-template>
 
   <div class="text-center bg-white">
-    <p class="text-xs font-semibold tracking-widest text-gray-500 uppercase" (click)="verProducto(producto)">
+    <p class="text-xs font-semibold tracking-widest text-gray-500 uppercase">
       {{ producto.nombre }} 
     </p>
     <p class="text-sm font-semibold text-gray-900 mt-2">
