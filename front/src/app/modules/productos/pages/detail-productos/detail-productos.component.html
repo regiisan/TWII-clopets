@@ -1,41 +1,63 @@
 <div class="w-full min-h-screen bg-white p-8 flex justify-center">
   <div class="grid grid-cols-1 md:grid-cols-2 gap-8 w-full max-w-7xl bg-white p-8 rounded-lg">
-    <!-- Imagen del producto -->
+
+    <!-- Columna imagen -->
     <div class="w-full h-full">
-      <img
-        [src]="'http://localhost:3000/public/images/' + producto?.imagen_principal"
-        [alt]="producto?.nombre"
-        class="w-full h-full object-cover"
-      />
+      <ng-container *ngIf="producto; else loadingTpl">
+        <img
+          [src]="'http://localhost:3000/public/images/' + producto?.imagen_principal"
+          [alt]="producto?.nombre"
+          class="w-full h-full object-cover rounded-lg"
+        />
+      </ng-container>
     </div>
 
-    <!-- Info del producto -->
-    <div class="flex flex-col space-y-6">
-      <!-- Título + Precio -->
+    <!-- Columna info -->
+    <div class="flex flex-col space-y-6" *ngIf="producto">
+
+      <!-- Título + precio -->
       <div class="flex flex-col">
-        <h1 class="text-2xl md:text-3xl font-semibold text-gray-900">{{ producto?.nombre }}</h1>
+        <h1 class="text-2xl md:text-3xl font-semibold text-gray-900">
+          {{ producto.nombre }}
+        </h1>
         <span class="text-xl font-medium text-gray-900 mt-2">
-          {{ producto?.precio | currency : 'ARS' : 'symbol' : '1.2-2' : 'es-AR' }}
+          {{ producto.precio | currency : 'ARS' : 'symbol' : '1.2-2' : 'es-AR' }}
         </span>
       </div>
 
-      <!-- Size -->
-      <div class="grid grid-cols-6 gap-2">
-        <button
-          *ngFor="let t of producto?.producto_talle"
-          class="border rounded-md py-2 text-sm hover:border-gray-400 transition"
-          [class.border-indigo-600]="t.stock > 0"
-          [class.text-indigo-600]="t.stock > 0"
-          [class.border-indigo-600]="t.talle === talleSeleccionado"
-          [disabled]="t.stock === 0"
-          (click)="seleccionarTalle(t.talle)"
-        >
-          {{ t.talle }}
-        </button>
+      <!-- Talles -->
+      <div class="space-y-2">
+        <p class="text-sm text-gray-600 font-medium">Talle</p>
+
+        <div class="grid grid-cols-6 gap-2">
+          <button
+            *ngFor="let t of producto.producto_talle"
+            type="button"
+            class="border rounded-md py-2 text-sm transition
+                   flex items-center justify-center
+                   disabled:opacity-40 disabled:cursor-not-allowed"
+            [class.border-indigo-600]="t.talle === talleSeleccionado"
+            [class.text-indigo-600]="t.talle === talleSeleccionado"
+            [disabled]="t.stock === 0"
+            (click)="seleccionarTalle(t.talle)"
+          >
+            {{ t.talle }}
+          </button>
+        </div>
+
+        <p class="text-xs text-rose-500" *ngIf="!talleSeleccionado">
+          Seleccioná un talle antes de añadir al carrito.
+        </p>
       </div>
 
-      <!-- Botón -->
-      <button class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-medium py-3 rounded-lg transition">
+      <!-- Botón carrito -->
+      <button
+        type="button"
+        class="w-full bg-indigo-600 hover:bg-indigo-700 disabled:bg-gray-300 disabled:text-gray-500
+               text-white font-medium py-3 rounded-lg transition"
+        [disabled]="!talleSeleccionado"
+        (click)="agregarAlCarrito()"
+      >
         Añadir al carrito
       </button>
 
@@ -43,42 +65,35 @@
       <div>
         <h3 class="text-lg font-semibold text-gray-900 mb-2">Descripción</h3>
         <p class="text-base text-gray-700 leading-relaxed">
-          {{ producto?.descripcion }}
+          {{ producto.descripcion }}
         </p>
       </div>
 
-      <!-- Acordeón PrimeNG -->
+      <!-- Acordeón info adicional -->
       <div>
         <h3 class="text-lg font-semibold text-gray-900 mb-3">Información adicional</h3>
 
         <div class="space-y-0.5 border-t border-gray-200">
+
+          <!-- Devoluciones -->
           <div class="border-b border-gray-200">
             <h2 id="accordion-heading-1">
               <button
                 type="button"
                 class="flex items-center justify-between w-full py-4 px-2 font-medium text-left text-gray-800 bg-white hover:bg-gray-50 transition"
-                aria-expanded="false"
-                aria-controls="accordion-body-1"
                 (click)="toggleAccordion('devoluciones')"
               >
                 <span>Devoluciones</span>
                 <svg
                   class="w-5 h-5 shrink-0 transform transition-transform"
                   [class.rotate-180]="openPanel === 'devoluciones'"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
+                  fill="none" stroke="currentColor" viewBox="0 0 24 24"
                 >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M19 9l-7 7-7-7"
-                  ></path>
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
                 </svg>
               </button>
             </h2>
-            <div id="accordion-body-1" [hidden]="openPanel !== 'devoluciones'">
+            <div [hidden]="openPanel !== 'devoluciones'">
               <div class="py-4 px-2 text-base text-gray-700 bg-white">
                 <p class="m-0">
                   En CloPets podés realizar cambios dentro de los 15 días posteriores a la compra. El
@@ -89,33 +104,25 @@
             </div>
           </div>
 
+          <!-- Envíos -->
           <div class="border-b border-gray-200">
             <h2 id="accordion-heading-2">
               <button
                 type="button"
                 class="flex items-center justify-between w-full py-4 px-2 font-medium text-left text-gray-800 bg-white hover:bg-gray-50 transition"
-                aria-expanded="false"
-                aria-controls="accordion-body-2"
                 (click)="toggleAccordion('envios')"
               >
                 <span>Envíos y tiempos de entrega</span>
                 <svg
                   class="w-5 h-5 shrink-0 transform transition-transform"
                   [class.rotate-180]="openPanel === 'envios'"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
+                  fill="none" stroke="currentColor" viewBox="0 0 24 24"
                 >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M19 9l-7 7-7-7"
-                  ></path>
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
                 </svg>
               </button>
             </h2>
-            <div id="accordion-body-2" [hidden]="openPanel !== 'envios'">
+            <div [hidden]="openPanel !== 'envios'">
               <div class="py-4 px-2 text-base text-gray-700 bg-white">
                 <p class="m-0">
                   Realizamos envíos a todo el país mediante Correo Argentino y mensajería privada en
@@ -126,44 +133,46 @@
             </div>
           </div>
 
+          <!-- Materiales -->
           <div class="border-b border-gray-200">
             <h2 id="accordion-heading-3">
               <button
                 type="button"
                 class="flex items-center justify-between w-full py-4 px-2 font-medium text-left text-gray-800 bg-white hover:bg-gray-50 transition"
-                aria-expanded="false"
-                aria-controls="accordion-body-3"
                 (click)="toggleAccordion('materiales')"
               >
                 <span>Materiales y cuidados</span>
                 <svg
                   class="w-5 h-5 shrink-0 transform transition-transform"
                   [class.rotate-180]="openPanel === 'materiales'"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
+                  fill="none" stroke="currentColor" viewBox="0 0 24 24"
                 >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="m5 15 7-7 7 7"
-                  />
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m5 15 7-7 7 7"/>
                 </svg>
               </button>
             </h2>
-            <div id="accordion-body-3" [hidden]="openPanel !== 'materiales'">
+            <div [hidden]="openPanel !== 'materiales'">
               <div class="py-4 px-2 text-base text-gray-700 bg-white">
                 <p class="m-0">
-                  a Todas nuestras prendas están confeccionadas con materiales suaves y duraderos.
+                  Todas nuestras prendas están confeccionadas con materiales suaves y duraderos.
                   Recomendamos lavado a mano o ciclo delicado, agua fría y evitar el uso de
                   blanqueadores.
                 </p>
               </div>
             </div>
           </div>
+
         </div>
       </div>
+
     </div>
+
   </div>
+
+  <!-- loading simple -->
+  <ng-template #loadingTpl>
+    <div class="flex items-center justify-center h-full">
+      <p class="text-gray-500">Cargando producto...</p>
+    </div>
+  </ng-template>
 </div>
