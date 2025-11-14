@@ -24,14 +24,14 @@ html, body {
 }
 
 body {
-  background-color: #f9fafb;   /* fondo clarito */
+  background-color: white;   /* fondo clarito */
   color: #0f172a;              /* texto oscuro */
-  font-family: 'Nunito', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-family: "Montserrat", sans-serif;
 }
 
 /* Para asegurarnos que el área entera de la app sea clara */
 app-root {
   display: block;
   min-height: 100vh;
-  background-color: #f9fafb;   /* mismo fondo que el body */
+  background-color: white;   /* mismo fondo que el body */
 }
