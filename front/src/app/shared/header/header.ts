@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { AuthService } from '../../modules/auth/auth.service';
 import { CarritoService } from '../../api/services/carrito/carrito.service';
+import { CarritoItem } from '../../api/interfaces/carrito.interface';
 
 @Component({
   selector: 'app-header',
@@ -16,7 +17,7 @@ export class Header {
   // mobile nav
   open = signal(false);
   toggle() { this.open.update(v => !v); }
-  close()  { this.open.set(false); }
+  close() { this.open.set(false); }
 
   // usuario
   userMenuOpen = signal(false);
@@ -63,4 +64,29 @@ export class Header {
     this.closeCart();
     this.router.navigateByUrl('/auth/login');
   }
+
+  goToCheckout() {
+    this.closeCart();
+    this.router.navigate(['/pedidos/checkout']);
+  }
+
+
+  removeCartItem(item: CarritoItem) {
+    const user = this.auth.currentUser;
+    if (!user) return;
+
+
+    if (item.cantidad > 1) {
+      this.carritoService
+        .actualizarCantidad(item.id_detalle, user.id_usuario, item.cantidad - 1)
+        .subscribe();
+    } else {
+  
+      this.carritoService
+        .eliminarProducto(item.id_detalle, user.id_usuario)
+        .subscribe();
+    }
+  }
+
+
 }

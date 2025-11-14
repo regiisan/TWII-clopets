@@ -1,5 +1,5 @@
 export type Animal = 'perro' | 'gato';
-export type Clasificacion = 'pañuelo' | 'sweater';
+export type Clasificacion = 'pañuelo' | 'sweater' | 'bota' | 'campera' | 'buzo' | 'collar' | 'remera';
 export type Talle = 'S' | 'M' | 'L' | 'XL';
 
 export interface ProductoTalle {

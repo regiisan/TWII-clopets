@@ -28,7 +28,7 @@ export class ProductoService {
     }
 
     if (q.clasificacion?.length) {
-      const mapped = q.clasificacion.map(c => c === 'pañuelo' ? 'pa_uelo' : c);
+      const mapped = q.clasificacion.map(c => c === 'pañuelo' ? 'panuelo' : c);
       where.AND.push({ clasificacion: { in: mapped as any } });
     }
 

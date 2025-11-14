@@ -31,7 +31,7 @@ export class ProductoRepository {
 
     return {
       animals: animals.map(a => a.animal).filter(Boolean),
-      clasificaciones: clasifs.map(c => c.clasificacion === 'pa_uelo' ? 'pañuelo' : c.clasificacion).filter(Boolean),
+      clasificaciones: clasifs.map(c => c.clasificacion === 'panuelo' ? 'pañuelo' : c.clasificacion).filter(Boolean),
       price: { min: Number(agg._min.precio ?? 0), max: Number(agg._max.precio ?? 0) }
     };
   }

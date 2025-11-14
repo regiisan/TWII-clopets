@@ -6,3 +6,32 @@
 * {
   font-family: 'Montserrat', sans-serif;
 }
+
+input, select, textarea {
+  @apply bg-white text-neutral-900 placeholder:text-neutral-400;
+}
+
+.dark input,
+.dark select,
+.dark textarea {
+  @apply bg-white text-neutral-900 placeholder:text-neutral-400;
+}
+
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: white;   /* fondo clarito */
+  color: #0f172a;              /* texto oscuro */
+  font-family: "Montserrat", sans-serif;
+}
+
+/* Para asegurarnos que el área entera de la app sea clara */
+app-root {
+  display: block;
+  min-height: 100vh;
+  background-color: white;   /* mismo fondo que el body */
+}

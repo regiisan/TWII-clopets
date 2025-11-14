@@ -76,6 +76,25 @@ export class AuthService {
     );
   }
 
+  updateDireccion(direccion: string) {
+  const user = this.currentUser;
+  if (!user) {
+    throw new Error('No hay usuario logueado');
+  }
+
+  const payload = { direccion };
+
+  return this.http.patch<AuthUser>(
+    `${this.base}/usuario/${user.id_usuario}/direccion`,
+    payload
+  ).pipe(
+    tap((updatedUser) => {
+      this.currentUserSubject.next(updatedUser);
+      localStorage.setItem('auth_user', JSON.stringify(updatedUser));
+    })
+  );
+}
+
   logout() {
     localStorage.removeItem('auth_user');
     this.currentUserSubject.next(null);

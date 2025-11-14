@@ -11,7 +11,7 @@ import type {
 const productoService = new ProductoService(new ProductoRepository());
 
 
-const CLASIFICACIONES: readonly Clasificacion[] = ["pañuelo", "sweater"] as const;
+const CLASIFICACIONES: readonly Clasificacion[] = ["pañuelo", "sweater", "bota", "campera", "buzo", "collar", "remera"] as const;
 const ANIMALES: readonly Animal[] = ["perro", "gato"] as const;
 
 
