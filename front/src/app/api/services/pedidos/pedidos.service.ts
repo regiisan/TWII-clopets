@@ -5,17 +5,20 @@ import { Pedido } from './interfaces/pedido.interface';
 import { Observable } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class PedidosService {
-
   private http = inject(HttpClient);
 
-  constructor() { }
+  constructor() {}
 
   listPedidos(id_usuario: number): Observable<Pedido[]> {
     return this.http.get<Pedido[]>(`${environment.api_url}/pedido`, {
-      params: { id_usuario: id_usuario.toString() }
+      params: { id_usuario: id_usuario.toString() },
     });
+  }
+
+  crearPedido(data: any) {
+    return this.http.post(`${environment.api_url}/crear`, data);
   }
 }

@@ -1,0 +1,15 @@
+<p-carousel 
+  [value]="productosDestacados"
+  [numVisible]="4"
+  [numScroll]="1"
+  [circular]="true"
+  [autoplayInterval]="4000"
+  class="mt-10"
+  styleClass="custom-carousel"
+>
+  <ng-template let-producto pTemplate="item">
+    <div class="p-4">
+      <app-card-productos-list [producto]="producto"></app-card-productos-list>
+    </div>
+  </ng-template>
+</p-carousel>

@@ -49,6 +49,10 @@ export class ProductosService {
     return this.http.get<ProductosResponse>(`${this.base}/producto`, { params });
   }
 
+  getProductosHome() {
+    return this.http.get<ProductosResponse>(`${environment.api_url}/producto`);
+  }
+
   /** Facetas para armar filtros (animales, clasificaciones, rango precio) */
   getFacetas(): Observable<{ animals: string[]; clasificaciones: string[]; price: { min: number; max: number } }> {
     return this.http.get<{ animals: string[]; clasificaciones: string[]; price: { min: number; max: number } }>(
