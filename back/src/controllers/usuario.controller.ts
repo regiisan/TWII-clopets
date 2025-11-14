@@ -56,4 +56,20 @@ export class UsuarioController {
       res.status(500).json({ message: "No se pudo obtener el usuario", error });
     }
   }
+
+  public updateDireccion = async (req, res) => {
+    try {
+      const id = Number(req.params.id);
+      const { direccion } = req.body;
+
+      if (!direccion) {
+        return res.status(400).json({ error: 'La dirección es requerida' });
+      }
+
+      const usuarioActualizado = await usuarioService.actualizarUsuario(id, { direccion });
+      res.json(usuarioActualizado);
+    } catch (error) {
+      res.status(500).json({ message: "No se pudo actualizar la dirección", error});
+    }
+  }
 }

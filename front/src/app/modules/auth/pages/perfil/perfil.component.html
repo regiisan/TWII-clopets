@@ -29,18 +29,31 @@
         <p class="text-lg font-medium">{{ user.email }}</p>
       </div>
 
-      <div class="bg-neutral-900/60 p-5 rounded-xl border border-white/5">
-        <p class="text-neutral-400 text-xs uppercase tracking-wide">Dirección</p>
-        <p class="text-lg font-medium">{{ user.direccion || 'Sin dirección cargada' }}</p>
-      </div>
+<div class="bg-neutral-900/60 p-5 rounded-xl border border-white/5">
+  <p class="text-neutral-400 text-xs uppercase tracking-wide">Dirección</p>
+
+  <!-- Formulario para editar dirección -->
+  <form [formGroup]="direccionForm" (ngSubmit)="actualizarDireccion()" class="flex gap-3 items-center">
+    <input
+      type="text"
+      formControlName="direccion"
+      class="flex-1 px-3 py-2 rounded-lg bg-neutral-800 border border-white/10 text-white"
+      placeholder="Ingresa tu dirección"
+    />
+
+    <button
+      type="submit"
+      class="px-4 py-2 rounded-lg bg-gradient-to-r from-indigo-500 to-fuchsia-500 font-semibold shadow hover:brightness-110 transition"
+    >
+      Guardar
+    </button>
+  </form>
+</div>
 
       <!-- Badges -->
       <div class="flex gap-3 pt-3">
         <span class="px-3 py-1 rounded-full text-xs bg-indigo-500/20 text-indigo-300 border border-indigo-500/40">
           Cliente CloPets
-        </span>
-        <span class="px-3 py-1 rounded-full text-xs bg-neutral-700/40 border border-white/10">
-          ID: {{ user.id_usuario }}
         </span>
       </div>
 

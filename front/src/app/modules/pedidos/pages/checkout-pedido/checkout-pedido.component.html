@@ -1,0 +1,111 @@
+<div class="min-h-screen bg-neutral-50 py-10 px-4">
+  <div class="max-w-6xl mx-auto">
+    <a routerLink="/productos" class="text-sm text-indigo-600 hover:underline">
+      ← Seguir comprando
+    </a>
+
+    <h1 class="mt-4 text-2xl font-semibold text-neutral-900">
+      Resumen de tu compra
+    </h1>
+
+    <!-- Layout principal -->
+    <div
+      class="mt-6 grid gap-8 md:grid-cols-[2fr,1fr] items-start"
+      *ngIf="(carrito$ | async) as carrito; else emptyCartTpl"
+    >
+      <!-- Izquierda: productos -->
+      <section class="bg-white rounded-2xl shadow-sm border border-neutral-200 p-6">
+        <h2 class="text-lg font-semibold text-neutral-900 mb-4">
+          Productos en tu carrito
+        </h2>
+
+        <div *ngIf="carrito.items?.length; else noItemsTpl" class="space-y-4">
+          <div
+            *ngFor="let item of carrito.items"
+            class="flex gap-4 border-b border-neutral-100 pb-4 last:border-b-0"
+          >
+            <img
+              class="w-20 h-20 rounded-xl object-cover bg-neutral-100"
+              [src]="'http://localhost:3000/public/images/' + item.producto.imagen_principal"
+              [alt]="item.producto.nombre"
+            />
+
+            <div class="flex-1">
+              <p class="text-sm font-medium text-neutral-900">
+                {{ item.producto.nombre }}
+              </p>
+              <p class="text-xs text-neutral-500 mt-0.5">
+                Talle {{ item.talle }} · Cantidad: {{ item.cantidad }}
+              </p>
+              <p class="text-sm font-semibold text-neutral-900 mt-1">
+                {{ item.subtotal | currency:'ARS':'symbol':'1.2-2':'es-AR' }}
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Derecha: datos del usuario + total -->
+      <aside class="space-y-4">
+        <!-- Datos del comprador -->
+        <div class="bg-white rounded-2xl shadow-sm border border-neutral-200 p-6">
+          <h2 class="text-lg font-semibold text-neutral-900 mb-4">
+            Datos del comprador
+          </h2>
+
+          <ng-container *ngIf="(currentUser$ | async) as user">
+            <p class="text-sm text-neutral-700">
+              <span class="font-semibold">Nombre:</span> {{ user.nombre }}
+            </p>
+            <p class="text-sm text-neutral-700 mt-1">
+              <span class="font-semibold">Email:</span> {{ user.email }}
+            </p>
+            <p class="text-sm text-neutral-700 mt-1" *ngIf="user.direccion">
+              <span class="font-semibold">Dirección:</span> {{ user.direccion }}
+            </p>
+          </ng-container>
+        </div>
+
+        <!-- Resumen de pago -->
+        <div class="bg-white rounded-2xl shadow-sm border border-neutral-200 p-6 space-y-4">
+          <h2 class="text-lg font-semibold text-neutral-900">
+            Resumen de pago
+          </h2>
+
+          <div class="flex justify-between text-sm">
+            <span class="text-neutral-600">Subtotal</span>
+            <span class="font-semibold text-neutral-900">
+              {{ carrito.totalAmount | currency:'ARS':'symbol':'1.2-2':'es-AR' }}
+            </span>
+          </div>
+
+          <button
+            type="button"
+            class="w-full mt-4 bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-semibold py-2.5 rounded-xl transition disabled:bg-neutral-400"
+            [disabled]="!carrito.items?.length"
+            (click)="finalizarCompra()"
+          >
+            Finalizar compra
+          </button>
+        </div>
+      </aside>
+    </div>
+
+    <!-- Carrito vacío -->
+    <ng-template #emptyCartTpl>
+      <div class="mt-10 text-center">
+        <p class="text-neutral-600 mb-4">Tu carrito está vacío.</p>
+        <a
+          routerLink="/productos"
+          class="inline-flex items-center px-4 py-2 rounded-xl border border-neutral-300 hover:bg-neutral-50 text-sm font-semibold text-neutral-900"
+        >
+          Volver a productos
+        </a>
+      </div>
+    </ng-template>
+
+    <ng-template #noItemsTpl>
+      <p class="text-sm text-neutral-500">No hay productos en el carrito.</p>
+    </ng-template>
+  </div>
+</div>
