@@ -25,7 +25,6 @@ export interface CarritoBackend {
   carrito_producto: CarritoProductoBackend[];
 }
 
-/** Item “plano” para usar en el front */
 export interface CarritoItem {
   id_detalle: number;
   talle: string;
@@ -39,7 +38,6 @@ export interface CarritoItem {
   };
 }
 
-/** Modelo que va a usar el header y el slide del carrito */
 export interface CarritoUI {
   id_carrito: number;
   items: CarritoItem[];

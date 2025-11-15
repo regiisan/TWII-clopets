@@ -25,7 +25,6 @@ export class DestacadosComponent implements OnInit {
   }
 
   cargarDestacados() {
-    // ⚠️ Cambia por tu endpoint real (ej: /productos/destacados)
     this.productosService.getProductosHome().subscribe({
       next: (data) => {
         console.log('Datos cargados:', this.productosDestacados[0]);

@@ -1,8 +1,8 @@
 :host {
   display: block;
   padding: 3rem 1rem 4rem;
-  background: #121218; /* mismo fondo oscuro que el resto */
-  min-height: calc(100vh - 64px); /* restando el header aprox */
+  background: #121218; 
+  min-height: calc(100vh - 64px); 
   color: #f9fafb;
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 }

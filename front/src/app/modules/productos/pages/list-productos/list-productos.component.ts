@@ -45,20 +45,16 @@ export class ListProductosComponent implements OnInit, OnDestroy {
   total = 0;
   loading = false;
 
-  // panel de filtros
   openFilters = false;
 
-  // facetas
   animals: string[] = [];
   clasifs: string[] = [];
   priceMinMax = { min: 0, max: 0 };
-  private facetsLoaded = false; // para no recalcular todo el tiempo
+  private facetsLoaded = false; 
 
-  // paginación simple
   page = 1;
   pageSize = 12;
 
-  // formulario de filtros
   form = this.fb.group({
     q: [''],
     precioMin: [null as number | null],
@@ -69,7 +65,6 @@ export class ListProductosComponent implements OnInit, OnDestroy {
   });
 
   ngOnInit(): void {
-    // ya no llamamos a cargarFacetas(), las sacamos de los productos
     this.listarProductos();
 
     this.form.valueChanges.subscribe(() => {
@@ -105,7 +100,6 @@ export class ListProductosComponent implements OnInit, OnDestroy {
           this.total = res.total;
           this.loading = false;
 
-          // solo la primera vez llenamos las facetas globales
           if (!this.facetsLoaded) {
             this.actualizarFacetasDesdeProductos(res.items);
             this.facetsLoaded = true;
@@ -122,7 +116,6 @@ export class ListProductosComponent implements OnInit, OnDestroy {
       });
   }
 
-  /** Construye animal, clasifs y rango de precio a partir de los productos */
   private actualizarFacetasDesdeProductos(items: Producto[]) {
     const animalsSet = new Set<string>();
     const clasifSet = new Set<string>();
@@ -146,7 +139,6 @@ export class ListProductosComponent implements OnInit, OnDestroy {
     };
   }
 
-  // helpers para los checkboxes
   toggleCheck(list: 'animal' | 'clasificacion', val: string, checked: boolean) {
     const arr = [...(this.form.value[list] || [])];
     const exists = arr.includes(val);

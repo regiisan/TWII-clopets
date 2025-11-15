@@ -8,12 +8,10 @@
       Resumen de tu compra
     </h1>
 
-    <!-- Layout principal -->
     <div
       class="mt-6 grid gap-8 md:grid-cols-[2fr,1fr] items-start"
       *ngIf="(carrito$ | async) as carrito; else emptyCartTpl"
     >
-      <!-- Izquierda: productos -->
       <section class="bg-white rounded-2xl shadow-sm border border-neutral-200 p-6">
         <h2 class="text-lg font-semibold text-neutral-900 mb-4">
           Productos en tu carrito
@@ -45,9 +43,7 @@
         </div>
       </section>
 
-      <!-- Derecha: datos del usuario + total -->
       <aside class="space-y-4">
-        <!-- Datos del comprador -->
         <div class="bg-white rounded-2xl shadow-sm border border-neutral-200 p-6">
           <h2 class="text-lg font-semibold text-neutral-900 mb-4">
             Datos del comprador
@@ -66,7 +62,6 @@
           </ng-container>
         </div>
 
-        <!-- Resumen de pago -->
         <div class="bg-white rounded-2xl shadow-sm border border-neutral-200 p-6 space-y-4">
           <h2 class="text-lg font-semibold text-neutral-900">
             Resumen de pago
@@ -91,7 +86,6 @@
       </aside>
     </div>
 
-    <!-- Carrito vacío -->
     <ng-template #emptyCartTpl>
       <div class="mt-10 text-center">
         <p class="text-neutral-600 mb-4">Tu carrito está vacío.</p>

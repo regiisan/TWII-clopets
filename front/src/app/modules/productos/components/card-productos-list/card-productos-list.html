@@ -1,25 +1,39 @@
-<p-card [ngClass]="'w-full shadow-sm custom-card'" (click)="verProducto(producto)">
+<p-card
+  class="group w-full rounded-3xl border border-slate-200 shadow-sm overflow-hidden
+         hover:shadow-xl hover:-translate-y-1.5 transition-all cursor-pointer bg-white custom-card"
+  (click)="verProducto(producto)"
+>
   <ng-template pTemplate="header">
-    <div class="relative w-full h-[500px] group overflow-hidden">
+    <div class="relative w-full h-[500px] overflow-hidden">
       <img
         [src]="'http://localhost:3000/public/images/' + producto.imagen_principal"
         [alt]="producto.nombre"
-        class="w-full h-full object-cover transition-opacity duration-500 group-hover:opacity-0"
+        class="w-full h-full object-contain transition-opacity duration-500 group-hover:opacity-0"
       />
+
       <img
         [src]="'http://localhost:3000/public/images/' + producto.imagen_secundaria"
         [alt]="producto.nombre"
-        class="absolute top-0 left-0 w-full h-full object-cover transition-opacity duration-500 opacity-0 group-hover:opacity-100"
+        class="absolute inset-0 w-full h-full object-cover transition-opacity duration-500 opacity-0 group-hover:opacity-100"
       />
     </div>
   </ng-template>
 
-  <div class="text-center bg-white">
-    <p class="text-xs font-semibold tracking-widest text-gray-500 uppercase">
-      {{ producto.nombre }} 
+  <div class="text-center bg-white px-4 pt-4 pb-5">
+    <p class="text-xs font-semibold tracking-[0.18em] text-slate-400 uppercase">
+      {{ producto.nombre }}
     </p>
-    <p class="text-sm font-semibold text-gray-900 mt-2">
+    <p class="mt-2 text-base font-semibold text-violet-600">
       {{ producto.precio | currency : 'ARS' : 'symbol' : '1.2-2' : 'es-AR' }}
     </p>
+
+    <div class="mt-3">
+      <span
+        class="inline-flex items-center justify-center rounded-full px-3 py-1 text-xs font-semibold
+               bg-slate-900 text-white group-hover:bg-violet-600 transition-colors"
+      >
+        Ver detalle
+      </span>
+    </div>
   </div>
 </p-card>

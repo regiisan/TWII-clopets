@@ -24,14 +24,33 @@ html, body {
 }
 
 body {
-  background-color: white;   /* fondo clarito */
-  color: #0f172a;              /* texto oscuro */
+  background-color: white; 
+  color: #0f172a;              
   font-family: "Montserrat", sans-serif;
 }
 
-/* Para asegurarnos que el área entera de la app sea clara */
 app-root {
   display: block;
   min-height: 100vh;
-  background-color: white;   /* mismo fondo que el body */
+  background-color: white;   
+}
+
+
+@keyframes ctaPulse {
+  0% {
+    transform: scale(1);
+    box-shadow: 0 10px 25px rgba(15, 23, 42, 0.18);
+  }
+  50% {
+    transform: scale(1.06);
+    box-shadow: 0 16px 35px rgba(15, 23, 42, 0.28);
+  }
+  100% {
+    transform: scale(1);
+    box-shadow: 0 10px 25px rgba(15, 23, 42, 0.18);
+  }
+}
+
+.animate-cta-pulse {
+  animation: ctaPulse 1.6s ease-in-out infinite;
 }

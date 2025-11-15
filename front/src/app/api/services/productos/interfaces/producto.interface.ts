@@ -2,12 +2,11 @@ export interface Producto {
   id_producto: number;
   nombre: string;
   descripcion?: string | null;
-  clasificacion: string;   // 'pañuelo' | 'sweater' (mapea 'pa_uelo' a 'pañuelo' si quisieras)
-  animal: string;          // 'perro' | 'gato'
+  clasificacion: string; 
+  animal: string;          
   precio: number;
   imagen_principal?: string | null;
   imagen_secundaria?: string | null;
-  // producto_talle?: { talle: string }[] // si querés usarlo después
 }
 
 export interface ProductosResponse {
@@ -19,8 +18,8 @@ export interface ProductosResponse {
 
 export interface ProductosQuery {
   q?: string;
-  clasificacion?: string[];   // múltiples
-  animal?: string[];          // múltiples
+  clasificacion?: string[]; 
+  animal?: string[];          
   precioMin?: number;
   precioMax?: number;
   sort?: 'price_asc'|'price_desc'|'newest';

@@ -10,11 +10,9 @@ export class CarritoService {
   private http = inject(HttpClient);
   private base = environment.api_url;
 
-  // estado en memoria
   private carritoSubject = new BehaviorSubject<CarritoUI | null>(null);
   carrito$ = this.carritoSubject.asObservable();
 
-  /** Cargar carrito del usuario logueado */
   loadCarrito(idUsuario: number) {
     return this.http
       .get<CarritoBackend>(`${this.base}/carrito`, {
@@ -26,7 +24,6 @@ export class CarritoService {
       );
   }
 
-  /** Agregar producto al carrito */
   addProducto(payload: {
     id_usuario: number;
     id_producto: number;
@@ -34,19 +31,16 @@ export class CarritoService {
     cantidad: number;
   }) {
     return this.http.post(`${this.base}/carrito`, payload).pipe(
-      // recargo el carrito después de agregar
       tap(() => this.loadCarrito(payload.id_usuario).subscribe())
     );
   }
 
-  /** Actualizar cantidad */
   actualizarCantidad(idDetalle: number, idUsuario: number, cantidad: number) {
     return this.http
       .put(`${this.base}/carrito/${idDetalle}`, { id_usuario: idUsuario, cantidad })
       .pipe(tap(() => this.loadCarrito(idUsuario).subscribe()));
   }
 
-  /** Eliminar producto */
   eliminarProducto(idDetalle: number, idUsuario: number) {
     return this.http
       .delete(`${this.base}/carrito/${idDetalle}`, {
@@ -55,7 +49,6 @@ export class CarritoService {
       .pipe(tap(() => this.loadCarrito(idUsuario).subscribe()));
   }
 
-  /** Vaciar carrito */
   vaciarCarrito(idUsuario: number) {
     return this.http
       .delete(`${this.base}/carrito`, {
@@ -63,8 +56,6 @@ export class CarritoService {
       })
       .pipe(tap(() => this.loadCarrito(idUsuario).subscribe()));
   }
-
-  // ---------- helpers ----------
 
   private mapToUI(back: CarritoBackend): CarritoUI {
     const items: CarritoItem[] =
