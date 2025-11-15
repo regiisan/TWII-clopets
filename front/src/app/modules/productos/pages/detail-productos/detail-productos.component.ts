@@ -34,12 +34,15 @@ export class DetailProductosComponent implements OnInit, OnDestroy {
   cantidad = 1;
   private userId: number | null = null;
 
+  // 👇 imágenes
+  readonly baseImgUrl = 'http://localhost:3000/public/images/';
+  currentImage: string | null = null;
+
   ngOnInit(): void {
     this.id = Number(this.activatedRouter.snapshot.paramMap.get('id'));
     this.verProducto();
     this.verTalles();
 
-    // me guardo el id del usuario logueado (si lo hay)
     this.auth.currentUser$.subscribe(user => {
       this.userId = user?.id_usuario ?? null;
     });
@@ -52,6 +55,10 @@ export class DetailProductosComponent implements OnInit, OnDestroy {
     this.productoService.verProducto(this.id).subscribe({
       next: (data) => {
         this.producto = data;
+        // imagen por defecto: principal
+        if (data?.imagen_principal) {
+          this.currentImage = this.baseImgUrl + data.imagen_principal;
+        }
         console.log('Producto:', data);
       },
     });
@@ -71,11 +78,24 @@ export class DetailProductosComponent implements OnInit, OnDestroy {
     this.talleSeleccionado = talle;
   }
 
-  // si después querés manejar cantidad con +/- ya está preparado
   cambiarCantidad(delta: number) {
     const nueva = this.cantidad + delta;
     if (nueva < 1) return;
     this.cantidad = nueva;
+  }
+
+  // 👇 cuando clickeás una miniatura
+  seleccionarImagen(tipo: 'principal' | 'secundaria') {
+    if (!this.producto) return;
+
+    const file =
+      tipo === 'principal'
+        ? this.producto.imagen_principal
+        : this.producto.imagen_secundaria || this.producto.imagen_principal;
+
+    if (!file) return;
+
+    this.currentImage = this.baseImgUrl + file;
   }
 
   agregarAlCarrito() {
@@ -99,7 +119,6 @@ export class DetailProductosComponent implements OnInit, OnDestroy {
     }).subscribe({
       next: () => {
         console.log('Producto agregado al carrito');
-        // si querés, acá después metemos un toast lindo de PrimeNG
       },
       error: (err) => {
         console.error('Error al agregar al carrito', err);

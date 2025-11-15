@@ -1,54 +1,79 @@
 <header
-  class="sticky top-0 z-50 backdrop-blur supports-[backdrop-filter]:bg-white/70 dark:supports-[backdrop-filter]:bg-neutral-900/60 bg-white/90 dark:bg-neutral-900/80 border-b border-black/5 dark:border-white/10">
+  class="sticky top-0 z-50 bg-white/90 backdrop-blur border-b border-slate-100 shadow-sm">
   <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
     <div class="flex h-16 items-center justify-between">
+
       <!-- Brand -->
-      <a routerLink="/home" class="flex items-center gap-3" (click)="close()">
+      <a
+        routerLink="/home"
+        (click)="close()"
+        class="flex items-center gap-3"
+      >
         <span
-          class="inline-grid place-items-center w-9 h-9 rounded-xl bg-gradient-to-br from-indigo-500 to-fuchsia-500 text-white font-bold">
+          class="inline-grid place-items-center w-9 h-9 rounded-2xl bg-gradient-to-br from-indigo-500 to-fuchsia-500 text-white font-bold shadow-md">
           CP
         </span>
         <div class="leading-tight">
-          <span class="block font-extrabold text-neutral-900 dark:text-white tracking-tight">CloPets</span>
-          <span class="block text-xs text-neutral-500 dark:text-neutral-400 -mt-0.5">Tienda para mascotas</span>
+          <span class="block font-extrabold text-slate-900 tracking-tight">
+            CloPets
+          </span>
+          <span class="block text-xs text-slate-400 -mt-0.5">
+            Tienda para mascotas
+          </span>
         </div>
       </a>
 
       <!-- Desktop nav -->
       <nav class="hidden md:flex items-center gap-6">
-        <a routerLink="/home" routerLinkActive="text-indigo-600 dark:text-indigo-400"
+
+        <a
+          routerLink="/home"
+          routerLinkActive="text-indigo-600"
           [routerLinkActiveOptions]="{ exact: true }"
-          class="text-sm font-medium text-neutral-700 dark:text-neutral-200 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">
+          class="relative text-sm font-medium text-slate-700 hover:text-indigo-600 transition-colors
+                 after:content-[''] after:absolute after:left-0 after:-bottom-1 after:h-[2px]
+                 after:w-0 after:bg-indigo-500 after:rounded-full after:transition-all hover:after:w-full">
           Inicio
         </a>
 
-        <a routerLink="/productos" routerLinkActive="text-indigo-600 dark:text-indigo-400"
-          class="text-sm font-medium text-neutral-700 dark:text-neutral-200 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">
+        <a
+          routerLink="/productos"
+          routerLinkActive="text-indigo-600"
+          class="relative text-sm font-medium text-slate-700 hover:text-indigo-600 transition-colors
+                 after:content-[''] after:absolute after:left-0 after:-bottom-1 after:h-[2px]
+                 after:w-0 after:bg-indigo-500 after:rounded-full after:transition-all hover:after:w-full">
           Productos
         </a>
 
         <ng-container *ngIf="currentUser$ | async">
-          <a routerLink="/pedidos/historial" routerLinkActive="text-indigo-600 dark:text-indigo-400"
-            class="text-sm font-medium text-neutral-700 dark:text-neutral-200 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">
+          <a
+            routerLink="/pedidos/historial"
+            routerLinkActive="text-indigo-600"
+            class="relative text-sm font-medium text-slate-700 hover:text-indigo-600 transition-colors
+                   after:content-[''] after:absolute after:left-0 after:-bottom-1 after:h-[2px]
+                   after:w-0 after:bg-indigo-500 after:rounded-full after:transition-all hover:after:w-full">
             Pedidos
           </a>
         </ng-container>
 
         <!-- Carrito (desktop) -->
-        <button type="button"
-          class="relative inline-flex items-center justify-center rounded-full p-2 hover:bg-neutral-900/5 dark:hover:bg-white/10 transition"
-          (click)="toggleCart()">
-          <!-- icono -->
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-neutral-800 dark:text-neutral-100" fill="none"
-            viewBox="0 0 24 24" stroke="currentColor">
+        <button
+          type="button"
+          (click)="toggleCart()"
+          class="relative inline-flex items-center justify-center rounded-full border border-slate-200 bg-white px-3 py-2
+                 hover:bg-slate-50 hover:border-indigo-200 transition shadow-sm">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-slate-800" fill="none"
+               viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"
-              d="M3 3h2l.4 2M7 13h10l3-8H6.4M7 13L5.4 5M7 13l-2 7h14m-8 0a1.5 1.5 0 11-3 0m10 0a1.5 1.5 0 11-3 0" />
+                  d="M3 3h2l.4 2M7 13h10l3-8H6.4M7 13L5.4 5M7 13l-2 7h14m-8 0a1.5 1.5 0 11-3 0m10 0a1.5 1.5 0 11-3 0" />
           </svg>
 
           <!-- badge cantidad -->
           <ng-container *ngIf="(carrito$ | async)?.totalItems as count">
-            <span *ngIf="count > 0"
-              class="absolute -top-0.5 -right-0.5 min-w-[18px] h-[18px] rounded-full bg-red-500 text-white text-[10px] leading-[18px] text-center font-semibold">
+            <span
+              *ngIf="count > 0"
+              class="absolute -top-1 -right-1 min-w-[18px] h-[18px] rounded-full bg-rose-500 text-white
+                     text-[10px] leading-[18px] text-center font-semibold shadow">
               {{ count }}
             </span>
           </ng-container>
@@ -56,9 +81,10 @@
 
         <!-- Auth area desktop -->
         <ng-container *ngIf="!(currentUser$ | async); else loggedDesktop">
-          <!-- Si NO hay usuario -> botón Ingresar -->
-          <a routerLink="/auth/login"
-            class="inline-flex items-center rounded-xl border border-neutral-200/70 dark:border-neutral-700 px-3.5 py-2 text-sm font-semibold text-neutral-900 dark:text-white hover:bg-neutral-50 dark:hover:bg-neutral-800 transition">
+          <a
+            routerLink="/auth/login"
+            class="inline-flex items-center rounded-full border border-slate-200 bg-white px-4 py-2 text-sm font-semibold
+                   text-slate-800 hover:border-indigo-300 hover:text-indigo-600 hover:bg-indigo-50 transition shadow-sm">
             Ingresar
           </a>
         </ng-container>
@@ -66,26 +92,33 @@
         <!-- Si hay usuario logueado -->
         <ng-template #loggedDesktop>
           <div class="relative">
-            <button type="button" (click)="toggleUserMenu()"
-              class="inline-flex items-center gap-2 rounded-full bg-neutral-900/5 dark:bg-white/10 px-3 py-1.5 hover:bg-neutral-900/10 dark:hover:bg-white/20 transition">
+            <button
+              type="button"
+              (click)="toggleUserMenu()"
+              class="inline-flex items-center gap-2 rounded-full bg-slate-50 px-3 py-1.5 border border-slate-200
+                     hover:bg-indigo-50 hover:border-indigo-200 transition shadow-sm">
               <div
-                class="w-8 h-8 rounded-full bg-indigo-500 text-white flex items-center justify-center text-xs font-semibold">
+                class="w-8 h-8 rounded-full bg-gradient-to-br from-indigo-500 to-fuchsia-500 text-white flex items-center justify-center text-xs font-semibold shadow">
                 {{ (currentUser$ | async)?.nombre?.[0] | uppercase }}
               </div>
-              <span class="text-sm text-neutral-800 dark:text-neutral-100">
+              <span class="text-sm text-slate-800">
                 {{ (currentUser$ | async)?.nombre }}
               </span>
             </button>
 
             <!-- Menú usuario -->
-            <div *ngIf="userMenuOpen()"
-              class="absolute right-0 mt-2 w-44 rounded-xl bg-white dark:bg-neutral-900 border border-neutral-200/70 dark:border-neutral-700 shadow-lg overflow-hidden z-50">
-              <a routerLink="/auth/perfil" (click)="closeUserMenu()"
-                class="block px-4 py-2 text-sm text-neutral-800 dark:text-neutral-100 hover:bg-neutral-50 dark:hover:bg-neutral-800">
+            <div
+              *ngIf="userMenuOpen()"
+              class="absolute right-0 mt-2 w-48 rounded-2xl bg-white border border-slate-100 shadow-lg overflow-hidden z-50">
+              <a
+                routerLink="/auth/perfil"
+                (click)="closeUserMenu()"
+                class="block px-4 py-2.5 text-sm text-slate-700 hover:bg-slate-50">
                 Mi cuenta
               </a>
-              <button (click)="logout()"
-                class="w-full text-left block px-4 py-2 text-sm text-red-500 hover:bg-neutral-50 dark:hover:bg-neutral-800">
+              <button
+                (click)="logout()"
+                class="w-full text-left block px-4 py-2.5 text-sm text-rose-500 hover:bg-rose-50">
                 Cerrar sesión
               </button>
             </div>
@@ -94,60 +127,77 @@
       </nav>
 
       <!-- Botón menú mobile -->
-      <button type="button"
-        class="md:hidden inline-flex items-center justify-center rounded-xl p-2 hover:bg-neutral-100 dark:hover:bg-neutral-800"
-        (click)="toggle()" aria-label="Abrir menú">
-        <svg *ngIf="!open()" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
-          stroke="currentColor">
+      <button
+        type="button"
+        (click)="toggle()"
+        aria-label="Abrir menú"
+        class="md:hidden inline-flex items-center justify-center rounded-full border border-slate-200 bg-white p-2
+               hover:bg-slate-50 hover:border-indigo-200 transition shadow-sm">
+        <svg *ngIf="!open()" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-slate-800" fill="none"
+             viewBox="0 0 24 24" stroke="currentColor">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
-            d="M3.75 6.75h16.5M3.75 12h16.5M3.75 17.25h16.5" />
+                d="M3.75 6.75h16.5M3.75 12h16.5M3.75 17.25h16.5" />
         </svg>
-        <svg *ngIf="open()" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
-          stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M6 18L18 6M6 6l12 12" />
+        <svg *ngIf="open()" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-slate-800" fill="none"
+             viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                d="M6 18L18 6M6 6l12 12" />
         </svg>
       </button>
     </div>
 
     <!-- Mobile nav -->
     <div *ngIf="open()" class="md:hidden pb-4 animate-[fadeIn_.15s_ease-in]">
-      <nav class="grid gap-2">
-        <a routerLink="/home" (click)="close()"
-          class="rounded-lg px-3 py-2 text-sm font-medium text-neutral-800 dark:text-neutral-200 hover:bg-neutral-100 dark:hover:bg-neutral-800">
+      <nav class="mt-2 grid gap-2 rounded-2xl border border-slate-100 bg-white/95 p-2 shadow-sm">
+        <a
+          routerLink="/home"
+          (click)="close()"
+          class="rounded-xl px-3 py-2 text-sm font-medium text-slate-800 hover:bg-slate-50">
           Inicio
         </a>
-        <a routerLink="/productos" (click)="close()"
-          class="rounded-lg px-3 py-2 text-sm font-medium text-neutral-800 dark:text-neutral-200 hover:bg-neutral-100 dark:hover:bg-neutral-800">
+        <a
+          routerLink="/productos"
+          (click)="close()"
+          class="rounded-xl px-3 py-2 text-sm font-medium text-slate-800 hover:bg-slate-50">
           Productos
         </a>
 
         <ng-container *ngIf="currentUser$ | async">
-          <a routerLink="/pedidos/historial" (click)="close()"
-            class="rounded-lg px-3 py-2 text-sm font-medium text-neutral-800 dark:text-neutral-200 hover:bg-neutral-100 dark:hover:bg-neutral-800">
+          <a
+            routerLink="/pedidos/historial"
+            (click)="close()"
+            class="rounded-xl px-3 py-2 text-sm font-medium text-slate-800 hover:bg-slate-50">
             Pedidos
           </a>
         </ng-container>
 
-        <a (click)="toggleCart(); close()"
-          class="rounded-lg px-3 py-2 text-sm font-medium text-neutral-800 dark:text-neutral-200 hover:bg-neutral-100 dark:hover:bg-neutral-800 cursor-pointer">
+        <button
+          type="button"
+          (click)="toggleCart(); close()"
+          class="text-left rounded-xl px-3 py-2 text-sm font-medium text-slate-800 hover:bg-slate-50">
           Carrito
-        </a>
+        </button>
 
-        <!-- Auth mobile -->
         <ng-container *ngIf="!(currentUser$ | async); else loggedMobile">
-          <a routerLink="/auth/login" (click)="close()"
-            class="rounded-lg px-3 py-2 text-sm font-semibold text-neutral-900 dark:text-white ring-1 ring-neutral-200/70 dark:ring-neutral-700 hover:bg-neutral-50 dark:hover:bg-neutral-800">
+          <a
+            routerLink="/auth/login"
+            (click)="close()"
+            class="rounded-full px-3 py-2 text-sm font-semibold text-slate-800 border border-slate-200
+                   hover:border-indigo-300 hover:bg-indigo-50 hover:text-indigo-600 transition">
             Ingresar
           </a>
         </ng-container>
 
         <ng-template #loggedMobile>
-          <a routerLink="/auth/perfil" (click)="close()"
-            class="rounded-lg px-3 py-2 text-sm font-medium text-neutral-800 dark:text-neutral-200 hover:bg-neutral-100 dark:hover:bg-neutral-800">
+          <a
+            routerLink="/auth/perfil"
+            (click)="close()"
+            class="rounded-xl px-3 py-2 text-sm font-medium text-slate-800 hover:bg-slate-50">
             Mi cuenta
           </a>
-          <button (click)="logout()"
-            class="rounded-lg px-3 py-2 text-sm font-semibold text-red-500 hover:bg-neutral-100 dark:hover:bg-neutral-800 text-left">
+          <button
+            (click)="logout()"
+            class="rounded-xl px-3 py-2 text-sm font-semibold text-rose-500 hover:bg-rose-50 text-left">
             Cerrar sesión
           </button>
         </ng-template>
@@ -155,94 +205,3 @@
     </div>
   </div>
 </header>
-
-<!-- PANEL LATERAL DEL CARRITO -->
-<div *ngIf="cartOpen()" class="fixed inset-0 z-[60]">
-  <!-- fondo overlay -->
-  <div class="absolute inset-0 bg-black/40" (click)="closeCart()"></div>
-
-  <!-- drawer -->
-  <div
-    class="absolute top-0 right-0 h-full w-full max-w-md bg-white dark:bg-neutral-950 shadow-2xl flex flex-col border-l border-white/10">
-
-    <!-- header drawer -->
-    <div
-      class="flex items-center justify-between px-4 sm:px-6 py-4 border-b border-neutral-200/60 dark:border-neutral-800">
-      <h2 class="text-sm font-semibold text-neutral-900 dark:text-neutral-50">
-        Tu carrito
-      </h2>
-      <button type="button" class="rounded-full p-1.5 hover:bg-neutral-100 dark:hover:bg-neutral-800"
-        (click)="closeCart()">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
-          <path fill-rule="evenodd"
-            d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
-            clip-rule="evenodd" />
-        </svg>
-      </button>
-    </div>
-
-    <!-- contenido carrito -->
-    <div class="flex-1 overflow-y-auto">
-      <ng-container *ngIf="(carrito$ | async) as carrito">
-        <ng-container *ngIf="carrito.items?.length; else emptyCart">
-
-          <div *ngFor="let item of carrito.items"
-            class="flex gap-3 px-4 sm:px-6 py-3 border-b border-neutral-200/60 dark:border-neutral-800">
-
-            <!-- imagen -->
-            <img [src]="'http://localhost:3000/public/images/' + item.producto.imagen_principal"
-              [alt]="item.producto.nombre"
-              class="w-16 h-16 rounded-lg object-cover bg-neutral-100 dark:bg-neutral-800" />
-
-            <!-- info -->
-            <div class="flex-1">
-              <p class="text-sm font-medium leading-tight text-neutral-900 dark:text-neutral-50">
-                {{ item.producto.nombre }}
-              </p>
-              <p class="text-xs text-neutral-500 dark:text-neutral-400 mt-0.5">
-                Talle {{ item.talle }} · Cant: {{ item.cantidad }}
-              </p>
-              <p class="text-sm font-semibold mt-1 text-neutral-900 dark:text-neutral-100">
-                {{ item.subtotal | currency:'ARS':'symbol':'1.2-2':'es-AR' }}
-              </p>
-            </div>
-
-            <!-- botón eliminar (resta 1 o borra) -->
-            <button type="button"
-              class="self-start mt-1 rounded-full p-1.5 text-neutral-400 hover:text-red-500 hover:bg-neutral-100 dark:hover:bg-neutral-800 transition"
-              (click)="removeCartItem(item)">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" class="w-4 h-4" fill="currentColor">
-                <path fill-rule="evenodd"
-                  d="M8.5 3a1 1 0 00-.894.553L7.118 4.5H4.5a.75.75 0 000 1.5h.38l.623 8.082A2 2 0 007.497 16h5.006a2 2 0 001.994-1.918L15.12 6h.38a.75.75 0 000-1.5h-2.618l-.488-.947A1 1 0 0011.5 3h-3zm1.75 4.25a.75.75 0 10-1.5 0v5a.75.75 0 001.5 0v-5zm2.75 0a.75.75 0 10-1.5 0v5a.75.75 0 001.5 0v-5z"
-                  clip-rule="evenodd" />
-              </svg>
-            </button>
-          </div>
-
-        </ng-container>
-      </ng-container>
-
-      <!-- carrito vacío -->
-      <ng-template #emptyCart>
-        <div class="px-6 py-10 text-center text-sm text-neutral-500 dark:text-neutral-400">
-          Tu carrito está vacío.
-        </div>
-      </ng-template>
-    </div>
-
-    <!-- footer subtotal -->
-    <div class="border-t border-neutral-200/60 dark:border-neutral-800 px-4 sm:px-6 py-4 space-y-3">
-      <div class="flex justify-between text-sm">
-        <span class="text-neutral-500 dark:text-neutral-400">Subtotal</span>
-        <span class="font-semibold text-neutral-900 dark:text-neutral-50">
-          {{ (carrito$ | async)?.totalAmount | currency:'ARS':'symbol':'1.2-2':'es-AR' }}
-        </span>
-      </div>
-
-      <button
-        class="w-full bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-semibold py-2.5 rounded-lg transition disabled:bg-neutral-400"
-        [disabled]="!(carrito$ | async)?.items?.length" (click)="goToCheckout()"> Finalizar compra
-      </button>
-    </div>
-  </div>
-</div>

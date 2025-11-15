@@ -6,6 +6,9 @@ import { CarritoService } from '../../../../api/services/carrito/carrito.service
 import { AuthService } from '../../../auth/auth.service';
 import { PedidosService } from '../../../../api/services/pedidos/pedidos.service';
 
+// 👇 Importamos SweetAlert2
+import Swal from 'sweetalert2';
+
 @Component({
   selector: 'app-checkout-pedido',
   standalone: true,
@@ -33,25 +36,67 @@ export class CheckoutPedidoComponent implements OnInit {
     const user = this.auth.currentUser;
     if (!user) return;
 
+    // ⛔ Dirección faltante → alerta estética
     if (!user.direccion) {
-      alert('Por favor, completa tu dirección en tu perfil antes de finalizar la compra.');
+      Swal.fire({
+        title: 'Dirección incompleta',
+        text: 'Por favor completá tu dirección en tu perfil antes de finalizar la compra.',
+        icon: 'warning',
+        confirmButtonText: 'Ir a mi perfil',
+        cancelButtonText: 'Cancelar',
+        showCancelButton: true,
+        confirmButtonColor: '#4F46E5',
+        cancelButtonColor: '#9CA3AF',
+        customClass: {
+          popup: 'rounded-2xl',
+          confirmButton: 'px-4 py-2 rounded-xl font-semibold',
+          cancelButton: 'px-4 py-2 rounded-xl font-semibold',
+        },
+      }).then(res => {
+        if (res.isConfirmed) {
+          this.router.navigate(['auth/perfil']);
+        }
+      });
+
       return;
     }
 
     const body = {
       id_usuario: user.id_usuario,
-      direccion_envio: user.direccion, // 👈 esto es lo que el back pide
+      direccion_envio: user.direccion,
     };
 
     this.pedidosService.crearPedido(body).subscribe({
-      next: (pedido) => {
-        // el backend ya vacía el carrito en PedidoService.crearPedido
-        alert('✅ Compra finalizada con éxito 🐾');
-        this.router.navigate(['/pedidos/historial']);
+      next: () => {
+        // ✔ Compra finalizada
+        Swal.fire({
+          title: '¡Compra realizada! 🐾',
+          text: 'Tu pedido fue registrado con éxito.',
+          icon: 'success',
+          timer: 2000,
+          showConfirmButton: false,
+          customClass: {
+            popup: 'rounded-2xl',
+          },
+        }).then(() => {
+          this.router.navigate(['/pedidos/historial']);
+        });
       },
+
       error: (err) => {
-        console.error('❌ Error al crear pedido', err.error || err);
-        alert('Ocurrió un error al registrar el pedido.');
+        console.error('❌ Error al crear pedido', err);
+
+        Swal.fire({
+          title: 'Error al registrar el pedido',
+          text: err?.error?.message || 'Ocurrió un problema inesperado.',
+          icon: 'error',
+          confirmButtonText: 'Entendido',
+          confirmButtonColor: '#4F46E5',
+          customClass: {
+            popup: 'rounded-2xl',
+            confirmButton: 'px-4 py-2 rounded-xl font-semibold',
+          },
+        });
       },
     });
   }
