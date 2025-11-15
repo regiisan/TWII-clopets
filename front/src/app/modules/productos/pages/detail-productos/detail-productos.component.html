@@ -9,7 +9,7 @@
   <ng-container *ngIf="producto as p; else loadingTpl">
     <div class="relative w-full max-w-6xl">
 
-      <!-- Card PRINCIPAL sin borde fluor -->
+      <!-- Card PRINCIPAL -->
       <div
         class="relative bg-white rounded-[24px] px-6 sm:px-8 lg:px-10 py-8 lg:py-10 
                shadow-xl border border-slate-200/70 grid gap-10 
@@ -19,13 +19,18 @@
         <!-- Columna imágenes -->
         <div class="space-y-4">
 
-          <!-- Imagen grande -->
-          <div class="relative overflow-hidden rounded-2xl bg-slate-100 aspect-[4/3] md:aspect-[4/3]">
+          <!-- Imagen grande (ajustada) -->
+          <div
+            class="relative overflow-hidden rounded-2xl bg-slate-100
+                   h-[420px] sm:h-[380px] lg:h-[700px]"
+          >
             <img
               *ngIf="currentImage; else loadingTpl"
               [src]="currentImage"
               [alt]="p.nombre"
-              class="w-full h-full object-cover transition-transform duration-500 hover:scale-[1.03]"
+              class="w-full h-full
+                     object-cover md:object-contain
+                     transition-transform duration-500 hover:scale-[1.03]"
             />
             <div class="absolute left-4 top-4 flex gap-2 text-xs font-semibold">
               <span class="px-2.5 py-1 rounded-full bg-white/90 text-slate-800 shadow-sm">
@@ -167,7 +172,7 @@
             </p>
           </div>
 
-          <!-- Acordeón info adicional (igual que antes, sólo con colores) -->
+          <!-- Acordeón info adicional (igual que antes) -->
           <div class="pt-2">
             <h3 class="text-base font-semibold text-slate-900 mb-3">
               Información adicional
