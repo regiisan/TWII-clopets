@@ -1,7 +1,6 @@
 <section
   class="relative min-h-[70vh] flex items-center justify-center px-4 bg-gradient-to-b from-slate-50 via-white to-slate-50"
 >
-  <!-- blobs de luz violeta de fondo -->
   <div class="pointer-events-none absolute inset-0 overflow-hidden">
     <div
       class="absolute -top-24 -left-10 w-64 h-64 bg-indigo-500/20 blur-3xl rounded-full"
@@ -12,12 +11,10 @@
   </div>
 
   <div class="relative w-full max-w-md">
-    <!-- borde “neón” -->
     <div
       class="absolute -inset-[2px] rounded-3xl bg-gradient-to-r from-indigo-500 via-fuchsia-500 to-indigo-500 opacity-80 blur-sm"
     ></div>
 
-    <!-- card principal -->
     <div
       class="relative rounded-3xl bg-white px-6 py-7 shadow-xl border border-slate-100/80"
     >
@@ -29,7 +26,6 @@
       </p>
 
       <form class="mt-6 grid gap-4" [formGroup]="form" (ngSubmit)="submit()">
-        <!-- Email -->
         <div>
           <label class="block text-sm font-medium text-slate-800">Email</label>
           <input
@@ -46,7 +42,6 @@
           </div>
         </div>
 
-        <!-- Password -->
         <div>
           <label class="block text-sm font-medium text-slate-800"
             >Contraseña</label
@@ -77,7 +72,6 @@
           </div>
         </div>
 
-        <!-- Botón -->
         <button
           type="submit"
           class="mt-2 inline-flex items-center justify-center rounded-xl bg-gradient-to-r from-indigo-500 to-fuchsia-500 text-white px-4 py-2.5 text-sm font-semibold shadow-md hover:brightness-110 transition disabled:opacity-60"
@@ -86,7 +80,6 @@
           {{ loading() ? 'Ingresando…' : 'Ingresar' }}
         </button>
 
-        <!-- Registro -->
         <p class="text-sm text-slate-600">
           ¿No tenés cuenta?
           <a
@@ -96,7 +89,6 @@
           >
         </p>
 
-        <!-- Error general -->
         <p class="text-sm text-rose-600" *ngIf="errorMsg()">
           {{ errorMsg() }}
         </p>

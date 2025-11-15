@@ -5,7 +5,6 @@ import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../../auth.service';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 
-// 👇 SweetAlert2
 import Swal from 'sweetalert2';
 
 @Component({
@@ -34,7 +33,6 @@ export class PerfilComponent implements OnInit {
 
   actualizarDireccion() {
     if (!this.direccionForm || this.direccionForm.invalid) {
-      // opcional: alerta si no completó
       Swal.fire({
         title: 'Dirección requerida',
         text: 'Por favor completá tu dirección antes de guardar.',

@@ -7,8 +7,8 @@ import { Producto } from '../../../modules/productos/interfaces/producto.interfa
 
 export type ProductosQuery = {
   q?: string;
-  clasificacion?: string[];          // ej: ['pañuelo','sweater']
-  animal?: string[];                 // ej: ['perro','gato']
+  clasificacion?: string[];          
+  animal?: string[];               
   precioMin?: number;
   precioMax?: number;
   sort?: 'price_asc' | 'price_desc' | 'newest';
@@ -26,14 +26,12 @@ export interface ProductosResponse {
 @Injectable({ providedIn: 'root' })
 export class ProductosService {
   private http = inject(HttpClient);
-  private base = environment.api_url; // ej: http://localhost:3000
+  private base = environment.api_url; 
 
-  /** Versión simple (compatibilidad con lo que ya tenías) */
   listProductos(): Observable<Producto[]> {
     return this.http.get<Producto[]>(`${this.base}/producto`);
   }
 
-  /** Versión con filtros/orden/paginación */
   getProductos(query: ProductosQuery): Observable<ProductosResponse> {
     let params = new HttpParams();
     if (query.q) params = params.set('q', query.q);

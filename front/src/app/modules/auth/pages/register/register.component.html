@@ -1,39 +1,26 @@
 <section
   class="relative min-h-[70vh] flex items-center justify-center px-4 bg-gradient-to-b from-slate-50 via-white to-slate-50"
 >
-  <!-- blobs de luz violeta de fondo -->
   <div class="pointer-events-none absolute inset-0 overflow-hidden">
-    <div
-      class="absolute -top-24 -left-10 w-64 h-64 bg-indigo-500/20 blur-3xl rounded-full"
-    ></div>
+    <div class="absolute -top-24 -left-10 w-64 h-64 bg-indigo-500/20 blur-3xl rounded-full"></div>
     <div
       class="absolute -bottom-24 -right-10 w-64 h-64 bg-fuchsia-500/20 blur-3xl rounded-full"
     ></div>
   </div>
 
   <div class="relative w-full max-w-lg">
-    <!-- borde “neón” -->
     <div
       class="absolute -inset-[2px] rounded-3xl bg-gradient-to-r from-indigo-500 via-fuchsia-500 to-indigo-500 opacity-80 blur-sm"
     ></div>
 
-    <!-- card principal -->
-    <div
-      class="relative rounded-3xl bg-white px-6 py-7 shadow-xl border border-slate-100/80"
-    >
-      <h1 class="text-2xl font-extrabold tracking-tight text-slate-900">
-        Crear cuenta
-      </h1>
-      <p class="mt-1 text-sm text-slate-500">
-        Completá tus datos para registrarte.
-      </p>
+    <div class="relative rounded-3xl bg-white px-6 py-7 shadow-xl border border-slate-100/80">
+      <h1 class="text-2xl font-extrabold tracking-tight text-slate-900">Crear cuenta</h1>
+      <p class="mt-1 text-sm text-slate-500">Completá tus datos para registrarte.</p>
 
       <form class="mt-6 grid gap-4" [formGroup]="form" (ngSubmit)="submit()">
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div>
-            <label class="block text-sm font-medium text-slate-800"
-              >Nombre</label
-            >
+            <label class="block text-sm font-medium text-slate-800">Nombre</label>
             <input
               type="text"
               formControlName="nombre"
@@ -48,9 +35,7 @@
           </div>
 
           <div>
-            <label class="block text-sm font-medium text-slate-800"
-              >Apellido</label
-            >
+            <label class="block text-sm font-medium text-slate-800">Apellido</label>
             <input
               type="text"
               formControlName="apellido"
@@ -58,9 +43,7 @@
             />
             <div
               class="mt-1 text-xs text-rose-600"
-              *ngIf="
-                form.get('apellido')?.touched && form.get('apellido')?.invalid
-              "
+              *ngIf="form.get('apellido')?.touched && form.get('apellido')?.invalid"
             >
               Ingresá tu apellido.
             </div>
@@ -84,9 +67,7 @@
         </div>
 
         <div>
-          <label class="block text-sm font-medium text-slate-800"
-            >Contraseña</label
-          >
+          <label class="block text-sm font-medium text-slate-800">Contraseña</label>
           <div class="mt-1 relative">
             <input
               [type]="showPass() ? 'text' : 'password'"
@@ -104,18 +85,14 @@
           </div>
           <div
             class="mt-1 text-xs text-rose-600"
-            *ngIf="
-              form.get('password')?.touched && form.get('password')?.invalid
-            "
+            *ngIf="form.get('password')?.touched && form.get('password')?.invalid"
           >
             Mínimo 6 caracteres.
           </div>
         </div>
 
         <div>
-          <label class="block text-sm font-medium text-slate-800"
-            >Dirección (opcional)</label
-          >
+          <label class="block text-sm font-medium text-slate-800">Dirección (opcional)</label>
           <input
             type="text"
             formControlName="direccion"
@@ -133,9 +110,7 @@
 
         <p class="text-sm text-slate-600">
           ¿Ya tenés cuenta?
-          <a
-            routerLink="/auth/login"
-            class="font-semibold text-indigo-600 hover:underline"
+          <a routerLink="/auth/login" class="font-semibold text-indigo-600 hover:underline"
             >Ingresá</a
           >
         </p>

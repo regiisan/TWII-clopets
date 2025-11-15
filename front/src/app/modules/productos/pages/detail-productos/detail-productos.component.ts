@@ -10,7 +10,6 @@ import { CarritoService } from '../../../../api/services/carrito/carrito.service
 import { AuthService } from '../../../auth/auth.service';
 import { Producto } from '../../interfaces/producto.interface';
 
-// SweetAlert2
 import Swal from 'sweetalert2';
 
 @Component({
@@ -22,13 +21,11 @@ import Swal from 'sweetalert2';
 })
 export class DetailProductosComponent implements OnInit, OnDestroy {
 
-  // servicios
   private productoService = inject(ProductosService);
   private activatedRouter = inject(ActivatedRoute);
   private carritoService = inject(CarritoService);
   private auth = inject(AuthService);
 
-  // estado
   id: number | null = null;
   producto: Producto | undefined;
   talles: any[] = [];
@@ -37,7 +34,6 @@ export class DetailProductosComponent implements OnInit, OnDestroy {
   cantidad = 1;
   private userId: number | null = null;
 
-  // imágenes
   readonly baseImgUrl = 'http://localhost:3000/public/images/';
   currentImage: string | null = null;
 
@@ -102,7 +98,6 @@ export class DetailProductosComponent implements OnInit, OnDestroy {
   agregarAlCarrito() {
     if (!this.producto) return;
 
-    // Usuario NO logueado → alerta + redirección
     if (!this.userId) {
       Swal.fire({
         icon: 'warning',
@@ -116,7 +111,6 @@ export class DetailProductosComponent implements OnInit, OnDestroy {
       return;
     }
 
-    // No seleccionó talle
     if (!this.talleSeleccionado) {
       Swal.fire({
         icon: 'info',
@@ -127,7 +121,6 @@ export class DetailProductosComponent implements OnInit, OnDestroy {
       return;
     }
 
-    // Agregar producto
     this.carritoService.addProducto({
       id_usuario: this.userId,
       id_producto: this.producto.id_producto,

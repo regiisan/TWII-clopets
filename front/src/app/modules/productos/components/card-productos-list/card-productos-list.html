@@ -3,17 +3,14 @@
          hover:shadow-xl hover:-translate-y-1.5 transition-all cursor-pointer bg-white custom-card"
   (click)="verProducto(producto)"
 >
-  <!-- Header: imagen con hover a la secundaria -->
   <ng-template pTemplate="header">
     <div class="relative w-full h-[500px] overflow-hidden">
-      <!-- Imagen principal -->
       <img
         [src]="'http://localhost:3000/public/images/' + producto.imagen_principal"
         [alt]="producto.nombre"
         class="w-full h-full object-contain transition-opacity duration-500 group-hover:opacity-0"
       />
 
-      <!-- Imagen secundaria al hacer hover -->
       <img
         [src]="'http://localhost:3000/public/images/' + producto.imagen_secundaria"
         [alt]="producto.nombre"
@@ -22,7 +19,6 @@
     </div>
   </ng-template>
 
-  <!-- Contenido -->
   <div class="text-center bg-white px-4 pt-4 pb-5">
     <p class="text-xs font-semibold tracking-[0.18em] text-slate-400 uppercase">
       {{ producto.nombre }}
@@ -31,7 +27,6 @@
       {{ producto.precio | currency : 'ARS' : 'symbol' : '1.2-2' : 'es-AR' }}
     </p>
 
-    <!-- Mini CTA opcional -->
     <div class="mt-3">
       <span
         class="inline-flex items-center justify-center rounded-full px-3 py-1 text-xs font-semibold

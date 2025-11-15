@@ -6,7 +6,6 @@ import { CarritoService } from '../../../../api/services/carrito/carrito.service
 import { AuthService } from '../../../auth/auth.service';
 import { PedidosService } from '../../../../api/services/pedidos/pedidos.service';
 
-// 👇 Importamos SweetAlert2
 import Swal from 'sweetalert2';
 
 @Component({
@@ -36,7 +35,6 @@ export class CheckoutPedidoComponent implements OnInit {
     const user = this.auth.currentUser;
     if (!user) return;
 
-    // ⛔ Dirección faltante → alerta estética
     if (!user.direccion) {
       Swal.fire({
         title: 'Dirección incompleta',
@@ -68,7 +66,6 @@ export class CheckoutPedidoComponent implements OnInit {
 
     this.pedidosService.crearPedido(body).subscribe({
       next: () => {
-        // ✔ Compra finalizada
         Swal.fire({
           title: '¡Compra realizada! 🐾',
           text: 'Tu pedido fue registrado con éxito.',

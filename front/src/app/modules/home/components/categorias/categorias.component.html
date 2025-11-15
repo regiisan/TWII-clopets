@@ -1,6 +1,4 @@
 <section class="relative w-full py-20 bg-white overflow-hidden">
-
-  <!-- Fondos suaves -->
   <div class="pointer-events-none absolute inset-0 overflow-hidden">
     <div class="absolute -top-24 -left-32 w-96 h-96 blur-3xl rounded-full"></div>
     <div class="absolute -bottom-32 -right-24 w-96 h-96 blur-3xl rounded-full"></div>
@@ -8,58 +6,53 @@
 
   <div class="relative max-w-7xl mx-auto px-6 lg:px-12">
     <div class="grid lg:grid-cols-2 gap-16 items-center">
-
-      <!-- Imagen -->
-      <div 
-        class="relative  overflow-hidden shadow-xl shadow-slate-900/5 
-               transform transition-all duration-700 hover:scale-[1.02]"
+      <div
+        class="relative overflow-hidden shadow-xl shadow-slate-900/5 transform transition-all duration-700 hover:scale-[1.02]"
       >
-        <img 
+        <img
           [src]="'http://localhost:3000/public/images/home/Imagen_Hero.webp'"
           alt="Nuevos productos para tu mascota"
           class="w-full h-[420px] lg:h-[540px] object-cover"
         />
       </div>
 
-      <!-- Texto -->
-      <div 
-        class="flex flex-col gap-6 animate-[fadeInUp_.6s_ease-out]">
-
-        <span
-          class="inline-block text-indigo-600 text-sm font-semibold uppercase tracking-wider">
+      <div class="flex flex-col gap-6 animate-[fadeInUp_.6s_ease-out]">
+        <span class="inline-block text-indigo-600 text-sm font-semibold uppercase tracking-wider">
           Novedades
         </span>
 
-        <h2
-          class="text-4xl lg:text-5xl font-extrabold text-slate-900 leading-tight tracking-tight">
+        <h2 class="text-4xl lg:text-5xl font-extrabold text-slate-900 leading-tight tracking-tight">
           Descubre los últimos productos<br />
           para tu mascota
         </h2>
 
-        <p 
-          class="text-slate-600 text-lg leading-relaxed max-w-[90%]">
-          Explora nuestra colección más reciente de juguetes, accesorios y alimentos,
-          seleccionados para ofrecer calidad y diversión a tu perro o gato.
+        <p class="text-slate-600 text-lg leading-relaxed max-w-[90%]">
+          Explora nuestra colección más reciente de juguetes, accesorios y alimentos, seleccionados
+          para ofrecer calidad y diversión a tu perro o gato.
         </p>
 
         <div class="mt-4">
           <a
-            routerLink="/productos"
-            class="inline-flex items-center gap-3 px-7 py-3.5 rounded-xl
-                   bg-gradient-to-r from-indigo-600 to-fuchsia-500 text-white
-                   text-base font-semibold shadow-lg shadow-indigo-500/30
-                   hover:brightness-110 transition"
+            href="/productos"
+            class="inline-flex items-center gap-3 px-7 py-3.5 rounded-xl bg-gradient-to-r from-indigo-600 to-fuchsia-500 text-white text-base font-semibold shadow-lg shadow-indigo-500/30 hover:brightness-110 transition"
           >
             Ver Novedades
-            <svg xmlns="http://www.w3.org/2000/svg"
-                 class="w-5 h-5"
-                 fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"
-                    d="M17.25 12 6.75 12m0 0 4.5 4.5M6.75 12l4.5-4.5" />
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="w-5 h-5"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="1.8"
+                d="M17.25 12 6.75 12m0 0 4.5 4.5M6.75 12l4.5-4.5"
+              />
             </svg>
           </a>
         </div>
-
       </div>
     </div>
   </div>

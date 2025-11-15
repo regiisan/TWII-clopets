@@ -6,6 +6,6 @@ import { PerfilComponent } from './pages/perfil/perfil.component'; // <-- IMPORT
 export const authRoutes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'registro', component: RegisterComponent },
-  { path: 'perfil', component: PerfilComponent },  // <-- NUEVO
+  { path: 'perfil', component: PerfilComponent },
   { path: '', redirectTo: 'login', pathMatch: 'full' }
 ];
