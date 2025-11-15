@@ -1,33 +1,74 @@
-<div class="border rounded-lg shadow-sm p-6 mb-6">
-  <div class="flex justify-between items-center mb-4">
+<div
+  class="mb-6 rounded-3xl border border-slate-200 bg-white/90 px-5 sm:px-6 py-5 sm:py-6
+         shadow-sm hover:shadow-md hover:-translate-y-0.5 transition"
+>
+  <!-- Header pedido -->
+  <div class="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+
+    <!-- Número -->
     <div class="space-y-1">
-      <p class="text-gray-700 text-sm">N° de pedido</p>
-      <p class="text-gray-500 font-medium">{{ pedido.id_pedido }}</p>
+      <p class="text-[11px] font-semibold tracking-[0.18em] uppercase text-slate-400">
+        N° de pedido
+      </p>
+      <p class="text-base font-semibold text-slate-900">
+        #{{ pedido.id_pedido }}
+      </p>
     </div>
 
+    <!-- Fecha -->
     <div class="space-y-1">
-      <p class="text-gray-700 text-sm">Fecha</p>
-      <p class="text-gray-500 font-medium">{{ pedido.fecha | date:'dd/MM/yyyy'}}</p>
+      <p class="text-[11px] font-semibold tracking-[0.18em] uppercase text-slate-400">
+        Fecha
+      </p>
+      <p class="text-sm font-medium text-slate-700">
+        {{ pedido.fecha | date:'dd/MM/yyyy' }}
+      </p>
     </div>
 
+    <!-- Total -->
     <div class="space-y-1">
-      <p class="text-gray-700 text-sm">Total</p>
-      <p class="text-gray-500 font-medium">
+      <p class="text-[11px] font-semibold tracking-[0.18em] uppercase text-slate-400">
+        Total
+      </p>
+      <p class="text-sm font-semibold text-violet-600">
         {{ pedido.total | currency:'ARS':'symbol':'1.2-2':'es-AR' }}
       </p>
     </div>
 
-    <div class="space-y-1">
-      <p class="text-gray-700 text-sm">Estado</p>
-      <p class="text-gray-500 font-medium">{{ pedido.estado }}</p>
+    <!-- Estado -->
+    <div class="space-y-1 text-left sm:text-right">
+      <p class="text-[11px] font-semibold tracking-[0.18em] uppercase text-slate-400">
+        Estado
+      </p>
+      <span
+        class="inline-flex items-center rounded-full px-3 py-1 text-xs font-semibold"
+        [ngClass]="{
+          'bg-emerald-50 text-emerald-700':
+            pedido.estado === 'completado' || pedido.estado === 'entregado',
+          'bg-amber-50 text-amber-700':
+            pedido.estado === 'pendiente',
+          'bg-rose-50 text-rose-700':
+            pedido.estado === 'cancelado',
+          'bg-slate-100 text-slate-700':
+            pedido.estado !== 'completado' &&
+            pedido.estado !== 'entregado' &&
+            pedido.estado !== 'pendiente' &&
+            pedido.estado !== 'cancelado'
+        }"
+      >
+        {{ pedido.estado | titlecase }}
+      </span>
     </div>
+
   </div>
 
-  <hr class="my-4">
-
-  <!-- Lista de productos -->
-  <app-productos-pedido
-    *ngFor="let producto of pedido.productos"
-    [producto]="producto">
-  </app-productos-pedido>
+  <!-- Productos del pedido -->
+  <div class="mt-4 pt-4 border-t border-slate-100">
+    <div class="rounded-2xl bg-slate-50/70 border border-slate-100 px-4 py-3">
+      <app-productos-pedido
+        *ngFor="let producto of pedido.productos"
+        [producto]="producto">
+      </app-productos-pedido>
+    </div>
+  </div>
 </div>
