@@ -70,23 +70,18 @@ export class Header {
     this.router.navigate(['/pedidos/checkout']);
   }
 
-
   removeCartItem(item: CarritoItem) {
     const user = this.auth.currentUser;
     if (!user) return;
-
 
     if (item.cantidad > 1) {
       this.carritoService
         .actualizarCantidad(item.id_detalle, user.id_usuario, item.cantidad - 1)
         .subscribe();
     } else {
-  
       this.carritoService
         .eliminarProducto(item.id_detalle, user.id_usuario)
         .subscribe();
     }
   }
-
-
 }
