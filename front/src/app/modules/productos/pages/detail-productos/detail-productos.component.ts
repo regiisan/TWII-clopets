@@ -10,6 +10,9 @@ import { CarritoService } from '../../../../api/services/carrito/carrito.service
 import { AuthService } from '../../../auth/auth.service';
 import { Producto } from '../../interfaces/producto.interface';
 
+// SweetAlert2
+import Swal from 'sweetalert2';
+
 @Component({
   selector: 'app-detail-productos',
   standalone: true,
@@ -34,7 +37,7 @@ export class DetailProductosComponent implements OnInit, OnDestroy {
   cantidad = 1;
   private userId: number | null = null;
 
-  // 👇 imágenes
+  // imágenes
   readonly baseImgUrl = 'http://localhost:3000/public/images/';
   currentImage: string | null = null;
 
@@ -55,7 +58,6 @@ export class DetailProductosComponent implements OnInit, OnDestroy {
     this.productoService.verProducto(this.id).subscribe({
       next: (data) => {
         this.producto = data;
-        // imagen por defecto: principal
         if (data?.imagen_principal) {
           this.currentImage = this.baseImgUrl + data.imagen_principal;
         }
@@ -84,7 +86,6 @@ export class DetailProductosComponent implements OnInit, OnDestroy {
     this.cantidad = nueva;
   }
 
-  // 👇 cuando clickeás una miniatura
   seleccionarImagen(tipo: 'principal' | 'secundaria') {
     if (!this.producto) return;
 
@@ -101,16 +102,32 @@ export class DetailProductosComponent implements OnInit, OnDestroy {
   agregarAlCarrito() {
     if (!this.producto) return;
 
+    // Usuario NO logueado → alerta + redirección
     if (!this.userId) {
-      alert('Tenés que iniciar sesión para agregar productos al carrito.');
+      Swal.fire({
+        icon: 'warning',
+        title: 'Iniciá sesión',
+        text: 'Tenés que iniciar sesión para agregar productos al carrito.',
+        confirmButtonColor: '#7C3AED',
+        confirmButtonText: 'Ir al login'
+      }).then(() => {
+        window.location.href = '/auth/login';
+      });
       return;
     }
 
+    // No seleccionó talle
     if (!this.talleSeleccionado) {
-      alert('Por favor seleccioná un talle antes de agregar al carrito.');
+      Swal.fire({
+        icon: 'info',
+        title: 'Seleccioná un talle',
+        text: 'Por favor seleccioná un talle antes de agregar al carrito.',
+        confirmButtonColor: '#7C3AED',
+      });
       return;
     }
 
+    // Agregar producto
     this.carritoService.addProducto({
       id_usuario: this.userId,
       id_producto: this.producto.id_producto,
@@ -118,11 +135,22 @@ export class DetailProductosComponent implements OnInit, OnDestroy {
       cantidad: this.cantidad,
     }).subscribe({
       next: () => {
-        console.log('Producto agregado al carrito');
+        Swal.fire({
+          icon: 'success',
+          title: 'Producto agregado',
+          text: `${this.producto?.nombre} fue agregado al carrito.`,
+          timer: 1500,
+          showConfirmButton: false,
+        });
       },
       error: (err) => {
         console.error('Error al agregar al carrito', err);
-        alert('Hubo un problema al agregar el producto al carrito.');
+        Swal.fire({
+          icon: 'error',
+          title: 'Error',
+          text: 'Hubo un problema al agregar el producto al carrito.',
+          confirmButtonColor: '#EF4444',
+        });
       },
     });
   }
